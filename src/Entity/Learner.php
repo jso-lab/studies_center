@@ -3,33 +3,45 @@
 namespace App\Entity;
 
 use App\Repository\LearnerRepository;
+use App\Entity\Courses;
 use Doctrine\ORM\Mapping as ORM;
+use PhpParser\Node\Expr\Cast\Object_;
 
 #[ORM\Entity(repositoryClass: LearnerRepository::class)]
+
+
+
 class Learner
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
-
+    
     #[ORM\Column(type: 'string', length: 100)]
+    
     private $firstName;
-
+    
     #[ORM\Column(type: 'string', length: 100)]
+    
     private $lastName;
 
     #[ORM\Column(type: 'string', length: 200)]
     private $email;
-
+    
     #[ORM\Column(type: 'string', length: 60)]
+
     private $password;
 
-    #[ORM\Column(type: 'array')]
-    private $courses = [];
-
+    
     #[ORM\Column(type: 'blob')]
     private $profilPicture;
+
+    #[ORM\Column(type: 'object')]
+    private $Lesson;
+
+    #[ORM\Column(type: 'object')]
+    private $courses;
 
     public function getId(): ?int
     {
@@ -84,7 +96,13 @@ class Learner
         return $this;
     }
 
-    public function getCourses(): ?array
+    public function __construct($illustration, $description)
+    {
+        $this->description = $description;
+        $this->illustration = $illustration;
+    }
+
+    public function getCourses(): array
     {
         return $this->courses;
     }
@@ -104,6 +122,18 @@ class Learner
     public function setProfilPicture($profilPicture): self
     {
         $this->profilPicture = $profilPicture;
+
+        return $this;
+    }
+
+    public function getLesson()
+    {
+        return $this->Lesson;
+    }
+
+    public function setLesson($Lesson): self
+    {
+        $this->Lesson = $Lesson;
 
         return $this;
     }
