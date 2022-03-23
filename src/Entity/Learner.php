@@ -6,12 +6,14 @@ use App\Repository\LearnerRepository;
 use App\Entity\Courses;
 use Doctrine\ORM\Mapping as ORM;
 use PhpParser\Node\Expr\Cast\Object_;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: LearnerRepository::class)]
 
 
 
-class Learner
+class Learner implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -86,8 +88,19 @@ class Learner
 
         return $this;
     }
+     /**
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
 
-    public function getPassword(): ?string
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -140,10 +153,15 @@ class Learner
 
         return $this;
     }
-
-    public function getRoles(): ?array
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
     {
-        return $this->roles;
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
     }
 
     public function setRoles(array $roles): self
@@ -151,5 +169,22 @@ class Learner
         $this->roles = $roles;
 
         return $this;
+    }
+    /**
+     * @see UserInterface
+     */
+    public function getSalt() : ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+
+    public function eraseCredentials()
+    {
+        //to clear any sensitive data
+        $this->plainPassword = null;
     }
 }
