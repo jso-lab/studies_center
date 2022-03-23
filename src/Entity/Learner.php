@@ -112,12 +112,7 @@ class Learner implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function __construct($illustration, $description)
-    {
-        $this->description = $description;
-        $this->illustration = $illustration;
-    }
-
+   
     public function getCourses(): array
     {
         return $this->courses;
