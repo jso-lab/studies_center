@@ -43,6 +43,9 @@ class Learner
     #[ORM\Column(type: 'object')]
     private $courses;
 
+    #[ORM\Column(type: 'array')]
+    private $roles = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -134,6 +137,18 @@ class Learner
     public function setLesson($Lesson): self
     {
         $this->Lesson = $Lesson;
+
+        return $this;
+    }
+
+    public function getRoles(): ?array
+    {
+        return $this->roles;
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }

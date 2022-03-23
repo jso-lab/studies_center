@@ -22,6 +22,9 @@ class Student
     #[ORM\Column(type: 'array', nullable: true)]
     private $courses = [];
 
+    #[ORM\Column(type: 'array')]
+    private $roles = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,18 @@ class Student
     public function setCourses(?array $courses): self
     {
         $this->courses = $courses;
+
+        return $this;
+    }
+
+    public function getRoles(): ?array
+    {
+        return $this->roles;
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }
