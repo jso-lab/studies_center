@@ -1,22 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Devenir instructeur - Eco IT, des formations pour la planête{% endblock %}
+{% block title %}S'inscrire comme apprenant - Eco IT - Des formations pour la planête{% endblock %}
 
 {% block body %}
-
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="#">Eco IT</a>
+				<a class="navbar-brand" href="{{ path('app_home')}}">Eco IT</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="#">Home</a>
+							<a class="nav-link active" aria-current="page" href="{{ path('app_home')}}">Home</a>
 						</li>
             	<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="#">A propos</a>
+							<a class="nav-link active" aria-current="page" href="{{ path('app_about')}}">A propos</a>
 						</li>
 					
 						<li class="nav-item dropdown">
@@ -45,11 +44,14 @@
 				</div>
 			</div>
 		</nav>
-	
-<main class="container py-5">
+        <main class="container py-5">
     <form class="row g-5 mt-4">
 	 
-    <h1 class="h3 mb-3 fw-normal">S'inscrire comme instructeur</h1>
+    <h1 class="h3 mb-3 fw-normal">S'inscrire comme apprenant</h1>
+    <div class="col-md-6">
+    <label for="inputEmail4" class="form-label">Pseudo</label>
+    <input type="email" class="form-control" id="inputEmail4">
+  </div>
   <div class="col-md-6">
     <label for="inputEmail4" class="form-label">Email</label>
     <input type="email" class="form-control" id="inputEmail4">
@@ -70,13 +72,7 @@
     <label for="inputCity" class="form-label">City</label>
     <input type="text" class="form-control" id="inputCity">
   </div>
-  <div class="col-md-4">
-    <label for="inputState" class="form-label">State</label>
-    <select id="inputState" class="form-select">
-      <option selected>Choose...</option>
-      <option>...</option>
-    </select>
-  </div>
+  
   <div class="col-md-2">
     <label for="inputZip" class="form-label">Zip</label>
     <input type="text" class="form-control" id="inputZip">
@@ -94,7 +90,7 @@
   </div>
 </form>
 </main>
-	<footer class="my-5 pt-5 text-muted text-center text-small">
+        	<footer class="my-5 pt-5 text-muted text-center text-small">
 			<p class="mb-1">© 2017–2020 Company Name</p>
 			<ul class="list-inline">
 				<li class="list-inline-item">
