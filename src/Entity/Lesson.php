@@ -19,11 +19,11 @@ class Lesson
     #[ORM\Column(type: 'text')]
     private $description;
 
-    #[ORM\Column(type: 'array', nullable: true)]
-    private $ressources = [];
-
     #[ORM\ManyToOne(targetEntity: Teacher::class, inversedBy: 'Lesson')]
     private $courses;
+
+    #[ORM\Column(type: 'blob', nullable: true)]
+    private $files;
 
     public function getId(): ?int
     {
@@ -54,17 +54,7 @@ class Lesson
         return $this;
     }
 
-    public function getRessources(): ?array
-    {
-        return $this->ressources;
-    }
-
-    public function setRessources(?array $ressources): self
-    {
-        $this->ressources = $ressources;
-
-        return $this;
-    }
+  
 
     public function getCourses(): ?Teacher
     {
@@ -74,6 +64,18 @@ class Lesson
     public function setCourses(?Teacher $courses): self
     {
         $this->courses = $courses;
+
+        return $this;
+    }
+
+    public function getFiles()
+    {
+        return $this->files;
+    }
+
+    public function setFiles($files): self
+    {
+        $this->files = $files;
 
         return $this;
     }
