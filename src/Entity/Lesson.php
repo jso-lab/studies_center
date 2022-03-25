@@ -22,6 +22,9 @@ class Lesson
     #[ORM\Column(type: 'array', nullable: true)]
     private $ressources = [];
 
+    #[ORM\ManyToOne(targetEntity: Teacher::class, inversedBy: 'Lesson')]
+    private $courses;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,18 @@ class Lesson
     public function setRessources(?array $ressources): self
     {
         $this->ressources = $ressources;
+
+        return $this;
+    }
+
+    public function getCourses(): ?Teacher
+    {
+        return $this->courses;
+    }
+
+    public function setCourses(?Teacher $courses): self
+    {
+        $this->courses = $courses;
 
         return $this;
     }

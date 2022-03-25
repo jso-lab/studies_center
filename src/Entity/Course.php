@@ -26,6 +26,9 @@ class Course
     #[ORM\Column(type: 'array')]
     private $sections = [];
 
+    #[ORM\ManyToOne(targetEntity: Teacher::class, inversedBy: 'courses')]
+    private $teacher;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -81,5 +84,17 @@ class Course
     public function __construct($illustration, $description){
         $this->illustration = $illustration;
         $this->description = $description;
+    }
+
+    public function getTeacher(): ?Teacher
+    {
+        return $this->teacher;
+    }
+
+    public function setTeacher(?Teacher $teacher): self
+    {
+        $this->teacher = $teacher;
+
+        return $this;
     }
 }
