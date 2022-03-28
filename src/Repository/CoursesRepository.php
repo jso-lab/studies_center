@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Courses;
+use App\Entity\Course;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -18,14 +18,14 @@ class CoursesRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Courses::class);
+        parent::__construct($registry, Course::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Courses $entity, bool $flush = true): void
+    public function add(Course $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -37,7 +37,7 @@ class CoursesRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Courses $entity, bool $flush = true): void
+    public function remove(Course $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {

@@ -3,6 +3,9 @@
 {% block title %}Edit Lesson{% endblock %}
 
 {% block body %}
+
+{% include 'navigation.html.twig'%}
+
     <h1>Edit Lesson</h1>
 
     {{ include('lesson/_form.html.twig', {'button_label': 'Update'}) }}

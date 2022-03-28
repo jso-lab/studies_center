@@ -3,6 +3,9 @@
 {% block title %}New Lesson{% endblock %}
 
 {% block body %}
+
+{% include 'navigation.html.twig'%}
+
     <h1>Create new Lesson</h1>
 
     {{ include('lesson/_form.html.twig') }}
