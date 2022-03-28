@@ -6,24 +6,29 @@
 
 {% include 'navigation.html.twig'%}
 
-	<div class="container">
+<div class="container">
 	
-		<main class="container-fluid">
+<main class="container-fluid">
 
 <div class="container py-4 ">
-       <div class="p-4 mb-4 rounded-2">
+    <div class="p-4 mb-4 rounded-2">
       <div class="container-fluid">
         <h1 class="display-5 fw-bold pt-5">Eco IT</h1>
-        <p class="col-md-8 fs-4">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
-        <a href="{{ path('app_subscribe_as_teacher')}}"><button class="btn btn-primary btn-lg"  type="button">Devenir instructeur</button></a>
-		<a href="{{ path('app_become_student')}}"><button class="btn btn-success btn-lg"  type="button">Devenir Apprenant</button></a>
+          <p class="col-md-8 fs-4">Using a series of utilities, you can create this jumbotron, 
+            just like the one in previous versions of Bootstrap. Check out the examples below for 
+            how you can remix and restyle it to your liking.</p>
+          <a href="{{ path('app_subscribe_as_teacher')}}">
+            <button class="btn btn-primary btn-lg"  type="button">Devenir instructeur</button>
+          </a>
+		      <a href="{{ path('app_become_student')}}">
+            <button class="btn btn-outline-success btn-lg"  type="button">Devenir Apprenant</button>
+          </a>
       </div>
     </div>
 </div>
 
-  <div class="container marketing">
-    <!-- START THE FEATURETTES -->
-
+<div class="container marketing">
+  
     <hr class="featurette-divider">
 
     <div class="row featurette">
@@ -65,9 +70,7 @@
 
     <hr class="featurette-divider">
 
-    <!-- /END THE FEATURETTES -->
-
-  </div><!-- /.container -->
+  </div>
 </main>
 </div>
 
