@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LoginController!{% endblock %}
+{% block title %}Se connecter - Eco IT - Des formations pour la planête{% endblock %}
 
 {% block body %}
 
@@ -8,46 +8,33 @@
 
 <main class=" container text-center">
     
-<section class="form-signin">
+<section class="form-signin my-5 py-5">
   <form>
  
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+    <h1 class="h3 mb-3 fw-normal">Merci de vous connecter</h1>
 
-    <div class="form-floating">
+    <div class="form-floating my-3">
       <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">Email address</label>
+      <label for="floatingInput">E-mail</label>
     </div>
-    <div class="form-floating">
+    <div class="form-floating my-3">
       <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Password</label>
+      <label for="floatingPassword">Mot de passe</label>
     </div>
 
     <div class="checkbox mb-3">
       <label>
-        <input type="checkbox" value="remember-me"> Remember me
+        <input type="checkbox" value="remember-me"> Se souvenir de moi
       </label>
     </div>
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">se connecter</button>
     <p class="mt-5 mb-3 text-muted"><a  href="#">Des difficultés de connexion ? Cliquez ici</a></p>
 
   </form>
 </section>
 
+</main>
 
-    
-  </main>
-  	<footer class="my-5 pt-5 text-muted text-center text-small">
-			<p class="mb-1">© 2017–2020 Company Name</p>
-			<ul class="list-inline">
-				<li class="list-inline-item">
-					<a href="#">Privacy</a>
-				</li>
-				<li class="list-inline-item">
-					<a href="#">Terms</a>
-				</li>
-				<li class="list-inline-item">
-					<a href="#">Support</a>
-				</li>
-			</ul>
-		</footer>
+{% include 'footer.html.twig' %}
+  
 {% endblock %}

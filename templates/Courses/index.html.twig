@@ -1,28 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CoursesController!
-{% endblock %}
+{% block title %}Nos formations - Eco IT - Des formations pour la planête{% endblock %}
+
 
 {% block body %}
 
 {% include 'navigation.html.twig'%}
 
-	<main>
+<main>
 
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Album example</h1>
+        <h1 class="fw-light">Les formations proposées</h1>
         <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
         <p>
-          <a href="#" class="btn btn-primary my-2">Main call to action</a>
-          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+          <a href="#" class="btn btn-primary my-2">Formations courtes</a>
+          <a href="#" class="btn btn-secondary my-2">Formations longues</a>
         </p>
       </div>
     </div>
   </section>
 
-  <div class="album py-5 bg-light">
+  <div class="album py-5 bg-primary">
     <div class="container">
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -178,20 +178,10 @@
 
 </main>
 
-		<footer class="my-5 pt-5 text-muted text-center text-small">
-			<p class="mb-1">© 2017–2020 Company Name</p>
-			<ul class="list-inline">
-				<li class="list-inline-item">
-					<a href="#">Privacy</a>
-				</li>
-				<li class="list-inline-item">
-					<a href="#">Terms</a>
-				</li>
-				<li class="list-inline-item">
-					<a href="#">Support</a>
-				</li>
-			</ul>
-		</footer>
-	</div>
+</div>
+
+{%include 'footer.html.twig' %}
 
 {% endblock %}
+
+
