@@ -1,13 +1,13 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="{{ path('app_home')}}">Eco IT</a>
+<nav class="navbar  navbar-expand-lg  ">
+			<div class="container">
+			<a href="{{ path('app_home')}}"><img class="img-responsive pr-5"  src="{{ asset('images/logo.png')}}" width="80" height="80" alt="logo - Eco IT" /></a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<div class="collapse navbar-collapse px-5" id="navbarSupportedContent">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item ml-auto">
-							<a class="nav-link active" aria-current="page" href="{{ path('app_home')}}">Accueil</a>
+							<a class="nav-link active ml-5" aria-current="page" href="{{ path('app_home')}}">Accueil</a>
 						</li>
             			<li class="nav-item">
 							<a class="nav-link " aria-current="page" href="{{ path('app_courses')}}">Nos Formations</a>
@@ -20,7 +20,7 @@
 							<a class="nav-link " aria-current="page" href="{{ path('app_about')}}">A propos</a>		
 						</li>
 					</ul>
-					<a href="{{ path('app_login')}}"><button type="button" class="btn btn-outline-dark">Se connecter</button></a>		
+					<a href="{{ path('app_login')}}"><button type="button" class="btn btn-outline-success">Se connecter</button></a>		
 				</div>
 			</div>
 		</nav>
