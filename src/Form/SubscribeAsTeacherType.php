@@ -13,26 +13,11 @@ class SubscribeAsTeacherType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Nom', EntityType::class, [
-                'choice_label'=> 'firstName', 
-                'class' => Teacher::class,
-            ])
-            ->add('Prénom' , EntityType::class, [
-                'choice_label'=> 'lastName', 
-                'class' => Teacher::class,
-            ])
-            ->add('email', EntityType::class, [
-                'choice_label'=> 'E-mail', 
-                'class' => Teacher::class,
-            ])
-            ->add('password',  EntityType::class, [
-                'choice_label'=> 'Mot de passe', 
-                'class' => Teacher::class,
-            ])
-            ->add('profilPicture',  EntityType::class, [
-                'choice_label'=> 'Photo de profil', 
-                'class' => Teacher::class,
-            ])
+            ->add('firstName')
+            ->add('lastName')
+            ->add('email')
+            ->add('password')
+            ->add('profilPicture')
            
         ;
     }
