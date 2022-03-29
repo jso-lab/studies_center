@@ -4,6 +4,7 @@
 		"@symfony/stimulus-bridge": "^3.0.0",
 		"@symfony/webpack-encore": "^1.7.0",
 		"core-js": "^3.0.0",
+		"file-loader": "^6.0.0",
 		"node-sass": "^7.0.1",
 		"regenerator-runtime": "^0.13.2",
 		"sass-loader": "^12.6.0",
@@ -15,6 +16,7 @@
 		"dev-server": "encore dev-server",
 		"dev": "encore dev",
 		"watch": "encore dev --watch",
+		"postinstall": "encore production --progress",
 		"build": "encore production --progress"
 	},
 	"dependencies": {
@@ -28,6 +30,7 @@
 	},
 	"engines": {
 		"node": "14.18.1",
-		"yarn": "1.22.17"
+		"yarn": "1.22.17",
+		"npm": "8.1.2"
 	}
 }
