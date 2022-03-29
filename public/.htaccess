@@ -1,7 +1,4 @@
-<IfModule>
-    DirectoryIndex index.php
-</IfModule>
-
+DirectoryIndex index.php
 
 <IfModule mod_negotiation.c>
     Options -MultiViews
@@ -9,7 +6,9 @@
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    RewriteCond %{HTTP} !=on
     RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
     RewriteCond %{REQUEST_URI}::$0 ^(/.+)/(.*)::\2$
     RewriteRule .* - [E=BASE:%1]
     RewriteCond %{HTTP:Authorization} .+
@@ -18,7 +17,6 @@
     RewriteRule ^index\.php(?:/(.*)|$) %{ENV:BASE}/$1 [R=301,L]
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ %{ENV:BASE}/index.php [L]
-    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 </IfModule>
 
 <IfModule !mod_rewrite.c>
