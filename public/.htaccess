@@ -1,4 +1,7 @@
-DirectoryIndex index.php
+<IfModule>
+    DirectoryIndex index.php
+</IfModule>
+
 
 <IfModule mod_negotiation.c>
     Options -MultiViews

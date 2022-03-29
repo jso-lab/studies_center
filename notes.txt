@@ -1,3 +1,2 @@
 "%kernel.logs_dir%/%kernel.environment%.log"
 
-web: $(composer config bin-dir)/heroku-php-apache2
