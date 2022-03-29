@@ -24,7 +24,7 @@ class Teacher
     #[ORM\Column(type: 'string', length: 255)]
     private $password;
 
-    #[ORM\Column(type: 'blob')]
+    #[ORM\Column(type: 'string')]
     private $profilPicture;
 
     #[ORM\OneToMany(mappedBy: 'courses', targetEntity: Lesson::class)]

@@ -2,8 +2,11 @@
 
 namespace App\Controller\Admin;
 
+
+use App\Entity\Teacher;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,13 +39,15 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         
-        return [
-            MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
-            MenuItem::section('Summary', 'fa fa-align-justify'),
-            MenuItem::section('Message', 'fa fa-envelope'),
-            MenuItem::section('Learners', 'fa fa-users'),
-            MenuItem::section('Settings', 'fa fa-gear')
-           
-        ];
+        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::subMenu('Teachers', 'fa fa-align-justify')->setSubItems([
+            MenuItem::linkToCrud('Create Teacher', 'fas fa-plus', Teacher::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Show Teacher', 'fas fa-eye', Teacher::class)
+        ]);
+        yield MenuItem::subMenu('Messages', 'fa fa-envelope')->setSubItems([
+         MenuItem::linkToCrud('Create message', 'fas fa-plus', Lesson::class)->setAction(Crud::PAGE_NEW),
+         MenuItem::linkToCrud('Show messages', 'fas fa-eye', Lesson::class)
+        ]);
+        yield MenuItem::section('Settings', 'fa fa-gear');
     }
 }
