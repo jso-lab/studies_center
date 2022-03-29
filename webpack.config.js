@@ -21,7 +21,7 @@ Encore
 	 * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
 	 */
 	.copyFiles({
-		from: '.assets/images',
+		from: './assets/images',
 	})
 	.addEntry('app', './assets/app.js')
 
