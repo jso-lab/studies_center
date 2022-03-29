@@ -6,6 +6,7 @@ use App\Entity\Lesson;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 
 class LessonCrudController extends AbstractCrudController
@@ -22,6 +23,7 @@ class LessonCrudController extends AbstractCrudController
             IdField::new('id'),
             TextField::new('title'),
             TextEditorField::new('description'),
+            AssociationField::new('Course')
         ];
     }
     

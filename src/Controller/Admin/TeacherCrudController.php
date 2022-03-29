@@ -11,6 +11,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class TeacherCrudController extends AbstractCrudController
 {
+    public const TEACHERS_BASE_PATH = 'images/users';
+    public const TEACHERS_UPLOAD_DIR = 'public/images/users';
+
     public static function getEntityFqcn(): string
     {
         return Teacher::class;
@@ -21,11 +24,13 @@ class TeacherCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm(),
-            TextField::new('firstName'),
-            TextField::new('lastName'),
-            TextField::new('email'),
-            TextField::new('password'),
-            ImageField::new('profilPicture')
+            TextField::new('firstName', 'Nom'),
+            TextField::new('lastName', 'Prénom'),
+            TextField::new('email', 'Adresse mail'),
+            TextField::new('password', 'Mot de passe'),
+            ImageField::new('profilPicture', 'Photo de profil')
+                ->setBasePath(self::TEACHERS_BASE_PATH)
+                ->setUploadDir(self::TEACHERS_UPLOAD_DIR)
         ];
     }
     
