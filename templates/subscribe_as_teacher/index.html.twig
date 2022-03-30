@@ -9,49 +9,37 @@
 	
 <main class="container py-5">
     <form class="row g-5 mt-4">
-	 
     <h1 class="h3 mb-3 fw-normal">S'inscrire comme instructeur</h1>
   <div class="col-md-6">
-    <label for="inputEmail4" class="form-label">Email</label>
+    <label for="inputFirstName" class="form-label">Nom</label>
+    <input type="text" class="form-control" id="inputFirstName">
+  </div>
+  <div class="col-md-6">
+    <label for="inputLastName" class="form-label">Prénom</label>
+    <input type="text" class="form-control" id="inputLastName">
+  </div>    
+  <div class="col-md-6">
+    <label for="inputEmail4" class="form-label">E-mail</label>
     <input type="email" class="form-control" id="inputEmail4">
   </div>
   <div class="col-md-6">
-    <label for="inputPassword4" class="form-label">Password</label>
+    <label for="inputPassword4" class="form-label">Mot de passe</label>
     <input type="password" class="form-control" id="inputPassword4">
   </div>
-  <div class="col-12">
-    <label for="inputAddress" class="form-label">Address</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-  </div>
-  <div class="col-12">
-    <label for="inputAddress2" class="form-label">Address 2</label>
-    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-  </div>
-  <div class="col-md-6">
-    <label for="inputCity" class="form-label">City</label>
-    <input type="text" class="form-control" id="inputCity">
-  </div>
-  <div class="col-md-4">
-    <label for="inputState" class="form-label">State</label>
-    <select id="inputState" class="form-select">
-      <option selected>Choose...</option>
-      <option>...</option>
-    </select>
-  </div>
-  <div class="col-md-2">
-    <label for="inputZip" class="form-label">Zip</label>
-    <input type="text" class="form-control" id="inputZip">
+   <div class="col-md-6">
+    <label for="inputPassword4" class="form-label">Confirmer le mot de passe</label>
+    <input type="password" class="form-control" id="inputPassword4">
   </div>
   <div class="col-12">
     <div class="form-check">
       <input class="form-check-input" type="checkbox" id="gridCheck">
       <label class="form-check-label" for="gridCheck">
-        Check me out
+        Accepter les Conditions Générales d'Utilisation
       </label>
     </div>
   </div>
   <div class="col-12">
-    <button type="submit" class="btn btn-primary">Sign in</button>
+    <button type="submit" class="btn btn-primary">Envoyer le formulaire</button>
   </div>
 </form>
 </main>

@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\TeacherCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,16 +21,26 @@ class DashboardController extends AbstractDashboardController
     {
         $this->container->get(AdminUrlGenerator::class);
 
-        if ('john' === $this->Teacher::class->getEmail()) {
-            return $this->redirect($adminUrlGenerator->setController(TeacherCrudController::class)->generateUrl());
-        }
     }
 
     #[Route('/admin', name: 'admin')]
+
+    #[IsGranted('ROLE_ADMIN')]
+
     public function index(): Response
     {
         $url = $this->adminUrlGenerator
             ->setController(TeacherCrudController::class)
+            ->generateUrl();
+        return $this->redirect($url);
+
+    }
+    #[IsGranted('ROLE_USER')]
+
+    public function dashboard(): Response
+    {
+        $url = $this->adminUrlGenerator
+            ->setController(CourseCrudController::class)
             ->generateUrl();
         return $this->redirect($url);
 
