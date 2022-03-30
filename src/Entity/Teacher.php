@@ -115,11 +115,11 @@ class Teacher
 
     public function removeLesson(Lesson $lesson): self
     {
-        if ($this->Lesson->removeElement($lesson)) {
-            // set the owning side to null (unless already changed)
-            if ($lesson->getCourses() === $this) {
+        if ($this->Lesson->removeElement($lesson) && ($lesson->getCourses() === $this)) {
+           
+          
                 $lesson->setCourses(null);
-            }
+            
         }
 
         return $this;
@@ -145,11 +145,10 @@ class Teacher
 
     public function removeCourse(Course $course): self
     {
-        if ($this->courses->removeElement($course)) {
-            // set the owning side to null (unless already changed)
-            if ($course->getTeacher() === $this) {
+        if ($this->courses->removeElement($course) && ($course->getTeacher() === $this)) {
+          
                 $course->setTeacher(null);
-            }
+         
         }
 
         return $this;
