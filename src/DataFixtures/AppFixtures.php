@@ -2,45 +2,32 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Admin;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use App\Factory\UserFactory;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 
 class AppFixtures extends Fixture
 {
+    private UserPasswordHasherInterface $hasher;
+
+    public function __construct(UserPasswordHasherInterface $hasher)
+    {
+        $this->hasher = $hasher;
+    }
+
     public function load(ObjectManager $manager)
     {
-        
-    // Load Users
-    UserFactory::new()
-    ->withAttributes([
-        'email' => 'cam2lellis@gmail.com',
-        'plainPassword' => 'Ha$$pw1',
-    ])
-    ->promoteRole('ROLE_ADMIN')
-    ->create();
+        $admin = new Admin();
+        $admin->setEmail('cam2lellis@gmail.com');
 
-    UserFactory::new()
-    ->withAttributes([
-        'email' => 'john@me.com',
-        'plainPassword' => 'azerty',
-    ])
-    ->promoteRole('ROLE_USER')
-    ->create();
-   
-    UserFactory::new()
-    ->withAttributes([
-        'email' => 'tisha@symfonycasts.com',
-        'plainPassword' => 'tishapass',
-        'firstName' => 'Tisha',
-        'lastName' => 'The Cat',
-        'avatar' => 'tisha.png',
-    ])
-    ->promoteRole('ROLE_USER')
-    ->create();
+        $password = $this->hasher->hashPassword($admin, 'H4$$pw1');
+        $admin->setPassword($password);
 
-    $manager->flush();
+        $manager->persist($admin);
+
+        $manager->flush();
 
     }
 }

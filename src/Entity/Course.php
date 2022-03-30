@@ -81,10 +81,6 @@ class Course
 
         return $this;
     }
-    public function __construct($illustration, $description){
-        $this->illustration = $illustration;
-        $this->description = $description;
-    }
 
     public function getTeacher(): ?Teacher
     {
