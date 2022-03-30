@@ -36,6 +36,13 @@ class Teacher
     #[ORM\Column(type: 'string', length: 255)]
     private $email;
 
+    #[ORM\Column(type: 'string')]
+    private $descritpion;
+
+    #[ORM\ManyToOne(targetEntity: Roles::class, inversedBy: 'teachers')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $role;
+
     public function __construct()
     {
         $this->Lesson = new ArrayCollection();
@@ -168,5 +175,29 @@ class Teacher
     public function __toString()
     {
         return $this->firstName;
+    }
+
+    public function getDescritpion(): ?string
+    {
+        return $this->descritpion;
+    }
+
+    public function setDescritpion(string $descritpion): self
+    {
+        $this->descritpion = $descritpion;
+
+        return $this;
+    }
+
+    public function getRole(): ?Roles
+    {
+        return $this->role;
+    }
+
+    public function setRole(?Roles $role): self
+    {
+        $this->role = $role;
+
+        return $this;
     }
 }

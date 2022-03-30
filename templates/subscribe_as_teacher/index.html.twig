@@ -8,50 +8,76 @@
 
 	
 <main class="container py-5">
+
+{{ form(form, { 'method': 'POST'}) }}
+
+
+
     <form class="row g-5 mt-4">
-    <h1 class="h3 mb-3 fw-normal">S'inscrire comme instructeur</h1>
-  <div class="col-md-6">
-    <label for="inputFirstName" class="form-label">Votre nom</label>
-    <input type="text" class="form-control" id="inputFirstName">
-  </div>
-  <div class="col-md-6">
-    <label for="inputLastName" class="form-label">Votre prénom</label>
-    <input type="text" class="form-control" id="inputLastName">
-  </div>    
-  <div class="col-md-6">
-    <label for="inputEmail4" class="form-label">Votre adresse mail</label>
-    <input type="email" class="form-control" id="inputEmail4">
-  </div>
-  <div class="col-md-6">
-    <label for="inputPassword4" class="form-label" aria-describedby="passwordHelpBlock">Choississez un mot de passe</label>
-    <input type="password" class="form-control" id="inputPassword4">
-    <div id="passwordHelpBlock" class="form-text">
-    Vore mot de passe doit contenir au moins entre 8 et 20 caractères, peut contenir des chiffres et les lettres, ne peut contenir des espaces, caractères spéciaux ou emoticônes.
-  </div>
-  </div>
-   <div class="col-md-6">
-    <label for="inputPassword4" class="form-label">Confirmez le mot de passe</label>
-    <input type="password" class="form-control" id="inputPassword4">
-  </div>
-  <div class="col-md-6">
-  <label for="formFile" class="form-label">Ajoutez une photo de profil</label>
-  <input class="form-control" type="file" id="formFile">
-</div>
-<div class="col-md-6">
-  <label for="formControlTextarea" class="form-label">Veuillez décrire vos spécialités</label>
-  <textarea class="form-control" id="formControlTextarea" rows="10"></textarea>
-</div>
+      <h1 class="h3 mb-3 fw-normal">S'inscrire comme instructeur</h1>
+
+        <div class="col-md-6">
+       
+          <label for="inputFirstName" class="form-label">Votre nom</label>
+          <input type="text" class="form-control" id="inputFirstName">
+        </div>
+
+        <div class="col-md-6">
+       
+          <label for="inputLastName" class="form-label">Votre prénom</label>
+          <input type="text" class="form-control" id="inputLastName">
+        </div>
+
+        <div class="col-md-6">
+       
+            <label for="inputEmail4" class="form-label">Votre adresse mail</label>
+            <input type="email" class="form-control" id="inputEmail4">
+        </div>
+
+        <div class="col-md-6">
+    
+          <label for="inputPassword4" class="form-label" aria-describedby="passwordHelpBlock">Choississez un mot de passe</label>
+          <input type="password" class="form-control" id="inputPassword4">
+        <div id="passwordHelpBlock" class="form-text">
+   
+
+        Vore mot de passe doit contenir au moins entre 8 et 20 caractères, 
+        peut contenir des chiffres et les lettres, ne peut contenir des espaces, 
+        caractères spéciaux ou emoticônes.
+        </div>
+        </div>
+
+        <div class="col-md-6">
+     
+          <label for="inputPassword4" class="form-label">Confirmez le mot de passe</label>
+          <input type="password" class="form-control" id="inputPassword4">
+        </div>
+
+        <div class="col-md-6">
+    
+            <label for="formFile" class="form-label">Ajoutez une photo de profil</label>
+            <input class="form-control" type="file" id="formFile">
+        </div>
+
+        <div class="col-md-6">
+     
+          <label for="formControlTextarea" class="form-label">Veuillez décrire vos spécialités</label>
+          <textarea class="form-control" id="formControlTextarea" rows="10"></textarea>
+        </div>
+        <div class="col-12">
+        
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck">
+            <label class="form-check-label" for="gridCheck">
+              Merci d'accepter les Conditions Générales d'Utilisation
+            </label>
+          </div>
+        </div>
   <div class="col-12">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="gridCheck">
-      <label class="form-check-label" for="gridCheck">
-        Merci d'accepter les Conditions Générales d'Utilisation
-      </label>
-    </div>
-  </div>
-  <div class="col-12">
+ 
     <button type="submit" class="btn btn-primary">Envoyer le formulaire</button>
   </div>
+ 
 </form>
 </main>
 

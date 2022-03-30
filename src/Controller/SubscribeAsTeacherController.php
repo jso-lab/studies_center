@@ -25,7 +25,7 @@ class SubscribeAsTeacherController extends AbstractController
         }
 
         return $this->render('subscribe_as_teacher/index.html.twig', [
-            'controller_name' => 'SubscribeAsTeacherController',
+            'form' => $form->createView(),
         ]);
     }
 }
