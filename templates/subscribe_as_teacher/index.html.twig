@@ -11,8 +11,10 @@
 
 {{ form(form, { 'method': 'POST'}) }}
 
+{% form_theme form 'foundation_5_layout.html.twig '%}
 
 
+{{ form_start(form) }}
     <form class="row g-5 mt-4">
       <h1 class="h3 mb-3 fw-normal">S'inscrire comme instructeur</h1>
 
@@ -80,6 +82,8 @@
  
 </form>
 </main>
+
+{{ form_start(form) }}
 
 {%include 'footer.html.twig' %}
 
