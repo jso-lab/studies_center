@@ -22,15 +22,17 @@ class BecomeStudentType extends AbstractType
             
             ])
             ->add('password', PasswordType::class, [
-                'label' => 'Mote de passe'
+                'label' => 'Mot de passe'
             ])
             ->add('pseudo', TextType::class, [
                 'label' => 'Pseudo'
-                    ])
-            ->add('Envoyer', SubmitType::class, [
-                'label' => 'Envoyer'          
             ])
-        ;
+            ->add('Envoyer', SubmitType::class, [
+                'label' => 'S\'inscrire'
+            ])
+           
+            ->getForm();
+        
     }
 
     public function configureOptions(OptionsResolver $resolver): void

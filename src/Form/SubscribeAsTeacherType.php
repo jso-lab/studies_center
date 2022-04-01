@@ -39,7 +39,9 @@ class SubscribeAsTeacherType extends AbstractType
             ])
             ->add('Envoyer', SubmitType::class, [
                 'label' => 'Envoyer'
-            ]) 
+            ])
+         
+            ->getForm(); 
         ;
     }
 

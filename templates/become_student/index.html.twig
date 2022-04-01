@@ -14,30 +14,10 @@
 
 {{ form_start(form) }}
 
-   <div class=" my-3">
-    <label for="pseudo">Pseudo</label>
-
-   {{ form_widget(form.pseudo) }}
-    
-  </div>
-  <div class=" my-3">
-   <label for="email">E-mail</label>
-
-    {{ form_widget(form.email)}}
-   
-  </div>
-  <div class="my-3 ">
-    <label for="password">Mot de passe</label>
-
-    {{ form_widget(form.password)}}
-  
-  </div>
-  
-   {{ form_widget(form.Envoyer)}}
+ {{ form(form)}}
 
 
-
- {{ form_end(form)}}
+{{ form_end(form)}}
 
 </main>
 
