@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220331101027 extends AbstractMigration
+final class Version20220401150735 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,16 +20,14 @@ final class Version20220331101027 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE teacher DROP descritpion');
-        $this->addSql('ALTER TABLE teacher ADD CONSTRAINT FK_B0F6A6D5D60322AC FOREIGN KEY (role_id) REFERENCES roles (id)');
-        $this->addSql('CREATE INDEX IDX_B0F6A6D5D60322AC ON teacher (role_id)');
+        $this->addSql('ALTER TABLE course ADD CONSTRAINT FK_169E6FB941807E1D FOREIGN KEY (teacher_id) REFERENCES teacher (id)');
+        $this->addSql('ALTER TABLE teacher ADD presentation VARCHAR(255) NOT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE teacher DROP FOREIGN KEY FK_B0F6A6D5D60322AC');
-        $this->addSql('DROP INDEX IDX_B0F6A6D5D60322AC ON teacher');
-        $this->addSql('ALTER TABLE teacher ADD descritpion LONGTEXT NOT NULL');
+        $this->addSql('ALTER TABLE course DROP FOREIGN KEY FK_169E6FB941807E1D');
+        $this->addSql('ALTER TABLE teacher DROP presentation');
     }
 }

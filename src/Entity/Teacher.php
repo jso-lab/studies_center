@@ -42,9 +42,9 @@ class Teacher implements  UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255)]
     private $email;
 
-    #[ORM\ManyToOne(targetEntity: Roles::class, inversedBy: 'teachers')]
-    #[ORM\JoinColumn(nullable: true)]
-    private $role;
+    #[ORM\Column(type: 'string', length: 255)]
+    private $presentation;
+
 
     public function __construct()
     {
@@ -183,17 +183,6 @@ class Teacher implements  UserInterface, PasswordAuthenticatedUserInterface
         return (string) $this->email;
     }
  
-    public function getRole(): ?Roles
-    {
-        return $this->role;
-    }
-
-    public function setRole(?Roles $role): self
-    {
-        $this->role = $role;
-
-        return $this;
-    }
     /**
      * @see UserInterface
      */
@@ -221,6 +210,18 @@ class Teacher implements  UserInterface, PasswordAuthenticatedUserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getPresentation(): ?string
+    {
+        return $this->presentation;
+    }
+
+    public function setPresentation(string $presentation): self
+    {
+        $this->presentation = $presentation;
 
         return $this;
     }
