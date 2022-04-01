@@ -2,17 +2,39 @@
 
 namespace App\Controller;
 
+use App\Entity\Student;
+use App\Form\BecomeStudentType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BecomeStudentController extends AbstractController
 {
     #[Route('/become/student', name: 'app_become_student')]
-    public function index(): Response
+
+    public function index(EntityManagerInterface $em, Request $request) : Response
     {
-        return $this->render('become_student/index.html.twig', [
-            'controller_name' => 'BecomeStudentController',
+        $student = new Student();
+        
+        $form = $this->createForm(BecomeStudentType::class, $student);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+           $form->getData();
+           
+            $student->setPseudo('pseudo');
+            $student->setEmail('email');
+            $student->setPassword('password');
+           
+            $em->persist($student);
+            $em->flush();
+
+            return $this->redirectToRoute('app_form_validated');
+        }
+        return $this->renderForm('become_student/index.html.twig', [
+            'form' => $form,
         ]);
     }
 }

@@ -22,17 +22,16 @@ class SubscribeAsTeacherController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-           
-           
+           $form->getData();
+        
 
-            /*
-            $teacher->setFirstName($data['firstName']);
-            $teacher->setLastName($data['lastName']);
-            $teacher->setEmail($data['email']);
-            $teacher->setPassword($data['password']);
-            $teacher->setProfilPicture($data['profilPicture']);
-            $teacher->setPresentation($data['presentation']);
-            */
+            $teacher->setFirstName('firstName');
+            $teacher->setLastName('lastName');
+            $teacher->setEmail('email');
+            $teacher->setPassword('password');
+            $teacher->setProfilPicture('profilPicture');
+            $teacher->setPresentation('presentation');
+            
 
             $em->persist($teacher);
             $em->flush();

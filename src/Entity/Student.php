@@ -31,6 +31,9 @@ class Student implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: true)]
     private $role;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $pseudo;
+
     public function __construct()
     {
         $this->Lesson = new ArrayCollection();
@@ -126,6 +129,18 @@ class Student implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
 
         return $this;
     }

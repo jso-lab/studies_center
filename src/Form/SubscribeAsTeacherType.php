@@ -3,11 +3,14 @@
 namespace App\Form;
 
 use App\Entity\Teacher;
+
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,36 +20,26 @@ class SubscribeAsTeacherType extends AbstractType
     {
         $builder
             ->add('firstName', TextType::class,[
-            
                 'label' => 'Nom'
-               
             ])
             ->add('lastName', TextType::class,[
-                
-                'label' =>'Prénom',
-                
+                'label' =>'Prénom', 
             ])
-            ->add('email', EmailType::class,[
-                
-                'label' => 'E-mail'
-               
+            ->add('email', EmailType::class,[  
+                'label' => 'E-mail' 
             ])
             ->add('password', PasswordType::class, [
-               
-                'label' => 'Mot de passe'
-               
+                'label' => 'Mot de passe' 
             ])
-            ->add('profilPicture', FileType::class,[
-                
-                'label' => 'Photo de profil'
-               
+            ->add('profilPicture', FileType::class,[ 
+             'label' => 'Photo de profil'  
             ])
-            ->add('presentation', TextType::class,[
-               
-                'label' => 'Vos spécialités'
-               
+            ->add('presentation', TextareaType::class,[
+                'label' => 'Vos spécialités'  
             ])
-            
+            ->add('Envoyer', SubmitType::class, [
+                'label' => 'Envoyer'
+            ]) 
         ;
     }
 

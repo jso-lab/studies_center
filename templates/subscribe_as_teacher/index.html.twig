@@ -5,25 +5,19 @@
 
 {% block body %}
 
+{% form_theme form 'bootstrap_5_horizontal_layout.html.twig'%}
+
 {% include 'navigation.html.twig'%}
 
 <main class=" container px-4">
     
 <section class="form-signin my-5 py-5">
-  <form>
-
+ 
   <h1 class="h3 mb-3 fw-normal">S'inscrire comme instructeur</h1>
 
- {{ form(form, { 'method': 'GET'}, { 'attr' : { 'novalidate': 'novalidate'}}) }}
-<div>
-    {{ form_start(form) }}
-   
-   <input type="submit" class="btn btn-primary"></input>
-    {{ form_end(form) }}
-</div>
-    </form>
-</section>
+ {{ form(form)}}
 
+</main>
 
 
 {%include 'footer.html.twig' %}
