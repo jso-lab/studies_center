@@ -7,23 +7,22 @@
 
 {% include 'navigation.html.twig'%}
 
- {% form_theme form 'foundation_5_layout.html.twig '%}
-
-	
+<main class=" container px-4">
+    
+<section class="form-signin my-5 py-5">
+  <form>
 
   <h1 class="h3 mb-3 fw-normal">S'inscrire comme instructeur</h1>
 
- {{ form(form, { 'method': 'POST'}, { 'attr' : { 'novalidate': 'novalidate'}}) }}
-
-   {{ form_start(form) }}
-
-    {{ form_widget(form) }}
-
-    <button type="submit" class="btn btn-primary">Envoyer</button>
-   {{ form_end(form) }}
-
-  
-
+ {{ form(form, { 'method': 'GET'}, { 'attr' : { 'novalidate': 'novalidate'}}) }}
+<div>
+    {{ form_start(form) }}
+   
+   <input type="submit" class="btn btn-primary"></input>
+    {{ form_end(form) }}
+</div>
+    </form>
+</section>
 
 
 

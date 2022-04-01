@@ -14,22 +14,25 @@ class SubscribeAsTeacherController extends AbstractController
 {
     #[Route('/subscribe/as/teacher', name: 'app_subscribe_as_teacher')]
 
-    public function new( EntityManagerInterface $em, Request $request)
+    public function new( EntityManagerInterface $em, Request $request) : Response
     {   
+        $teacher = new Teacher();
         
-        $form = $this->createForm(SubscribeAsTeacherType::class);
+        $form = $this->createForm(SubscribeAsTeacherType::class, $teacher);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $teacher = new Teacher();
+           
+           
 
+            /*
             $teacher->setFirstName($data['firstName']);
             $teacher->setLastName($data['lastName']);
             $teacher->setEmail($data['email']);
             $teacher->setPassword($data['password']);
             $teacher->setProfilPicture($data['profilPicture']);
-            $teacher->setPresentation($data['presentaion']);
+            $teacher->setPresentation($data['presentation']);
+            */
 
             $em->persist($teacher);
             $em->flush();

@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220401150735 extends AbstractMigration
+final class Version20220401161326 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -28,6 +28,6 @@ final class Version20220401150735 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE course DROP FOREIGN KEY FK_169E6FB941807E1D');
-        $this->addSql('ALTER TABLE teacher DROP presentation');
+        $this->addSql('ALTER TABLE teacher ADD presentation');
     }
 }
