@@ -19,21 +19,28 @@ class SubscribeAsTeacherType extends AbstractType
     {
         $builder
             ->add('firstName', TextType::class, [
-                'required' => true
+                'required' => true,
+                'label' => 'Nom'
             ])
-            ->add('lastName' , TextType::class, [
-                'required' => true
+            ->add('lastName', TextType::class, [
+                'required' => true,
+                'label' => 'Prénom'
             ])
             ->add('email', EmailType::class, [
-                'required' => true
+                'required' => true,
+                'label' => 'E-mail'
             ])
             ->add('password', PasswordType::class, [
-                'required' => true
+                'required' => true,
+                'label' => 'Mot de passe'
             ])
             ->add('profilPicture', FileType::class, [
-                'required' => true
+                'required' => true,
+                'label' => 'Photo de profil'
             ])
-            ->add('description', TextareaType::class, )
+            ->add('description', TextareaType::class, [
+                'label' => 'Vos spécialités',
+            ])
             ->add('Envoyer', SubmitType::class)
            
         ;

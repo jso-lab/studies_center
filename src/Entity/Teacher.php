@@ -6,9 +6,14 @@ use App\Repository\TeacherRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: TeacherRepository::class)]
-class Teacher
+
+
+class Teacher implements  UserInterface, PasswordAuthenticatedUserInterface
+
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -27,6 +32,7 @@ class Teacher
     #[ORM\Column(type: 'string')]
     private $profilPicture;
 
+
     #[ORM\OneToMany(mappedBy: 'courses', targetEntity: Lesson::class)]
     private $Lesson;
 
@@ -36,11 +42,8 @@ class Teacher
     #[ORM\Column(type: 'string', length: 255)]
     private $email;
 
-    #[ORM\Column(type: 'string')]
-    private $descritpion;
-
     #[ORM\ManyToOne(targetEntity: Roles::class, inversedBy: 'teachers')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $role;
 
     public function __construct()
@@ -172,23 +175,14 @@ class Teacher
 
         return $this;
     }
-    public function __toString()
+     /**
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
     {
-        return $this->firstName;
+        return (string) $this->email;
     }
-
-    public function getDescritpion(): ?string
-    {
-        return $this->descritpion;
-    }
-
-    public function setDescritpion(string $descritpion): self
-    {
-        $this->descritpion = $descritpion;
-
-        return $this;
-    }
-
+ 
     public function getRole(): ?Roles
     {
         return $this->role;
@@ -200,4 +194,36 @@ class Teacher
 
         return $this;
     }
+    /**
+     * @see UserInterface
+     */
+    public function getSalt() : ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+
+    public function eraseCredentials()
+    {
+        //to clear any sensitive data
+        $this->plainPassword = null;
+    }
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        //guarantee that Admin has his role
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+
 }

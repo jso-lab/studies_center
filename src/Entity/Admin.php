@@ -25,9 +25,6 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 60)]
     private $password;
 
-    #[ORM\Column(type: 'array')]
-    private $roles = [];
-
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 

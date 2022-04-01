@@ -4,9 +4,14 @@ namespace App\Entity;
 
 use App\Repository\StudentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: StudentRepository::class)]
-class Student
+
+class Student implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -22,8 +27,15 @@ class Student
     #[ORM\Column(type: 'array', nullable: true)]
     private $courses = [];
 
-    #[ORM\Column(type: 'array')]
-    private $roles = [];
+    #[ORM\ManyToOne(targetEntity: Roles::class, inversedBy: 'teachers')]
+    #[ORM\JoinColumn(nullable: true)]
+    private $role;
+
+    public function __construct()
+    {
+        $this->Lesson = new ArrayCollection();
+        $this->courses = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -54,10 +66,6 @@ class Student
         return $this;
     }
 
-    public function getCourses(): ?array
-    {
-        return $this->courses;
-    }
 
     public function setCourses(?array $courses): self
     {
@@ -65,10 +73,54 @@ class Student
 
         return $this;
     }
-
-    public function getRoles(): ?array
+     /**
+     * @return Collection<int, Course>
+     */
+    public function getCourses(): ?array
     {
-        return $this->roles;
+        return $this->courses;
+    }
+    public function getRole(): ?Roles
+    {
+        return $this->role;
+    }
+
+    public function setRole(?Roles $role): self
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+  
+    /**
+     * @see UserInterface
+     */
+    public function getSalt() : ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+
+    public function eraseCredentials()
+    {
+        //to clear any sensitive data
+        $this->plainPassword = null;
+    }
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        //guarantee that Admin has his role
+        return array_unique($roles);
+    }
+      /**
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
     }
 
     public function setRoles(array $roles): self
@@ -77,4 +129,5 @@ class Student
 
         return $this;
     }
+
 }
