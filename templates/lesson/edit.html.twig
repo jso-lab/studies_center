@@ -1,16 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Lesson{% endblock %}
+{% block title %}Espace de gestion{% endblock %}
 
 {% block body %}
 
+{% form_theme form 'bootstrap_5_horizontal_layout.html.twig'%}
+
 {% include 'navigation.html.twig'%}
 
-    <h1>Edit Lesson</h1>
+<main class=" container py-5">
+
+    <h1>Modifier une leçon</h1>
 
     {{ include('lesson/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_lesson_index') }}">back to list</a>
-
     {{ include('lesson/_delete_form.html.twig') }}
+
+
+   <a href="{{ path('app_lesson_index') }}"><button class="btn btn-primary">Retour à la liste</button></a>
+
+</main>
 {% endblock %}
