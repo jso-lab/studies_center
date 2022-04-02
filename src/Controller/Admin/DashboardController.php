@@ -24,12 +24,13 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'admin')]
     //#[IsGranted('ROLE_ADMIN')]
 
-    public function index() : Response
+    public function dashboard() : Response
     {
         $url = $this->adminUrlGenerator
         ->setController(TeacherCrudController::class)
         ->generateUrl();
         return $this->redirect($url);
+        
     }
 
     #[IsGranted('ROLE_USER')]
