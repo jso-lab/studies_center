@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SectionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SectionRepository::class)]
@@ -16,8 +18,13 @@ class Section
     #[ORM\ManyToOne(targetEntity: Course::class)]
     private $title;
 
-    #[ORM\ManyToOne(targetEntity: Lesson::class)]
+    #[ORM\ManyToMany(targetEntity: Lesson::class, inversedBy: 'sections')]
     private $lessons;
+
+    public function __construct()
+    {
+        $this->lessons = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -36,15 +43,28 @@ class Section
         return $this;
     }
 
-    public function getLessons(): ?Lesson
+    /**
+     * @return Collection<int, Lesson>
+     */
+    public function getLessons(): Collection
     {
         return $this->lessons;
     }
 
-    public function setLessons(?Lesson $lessons): self
+    public function addLesson(Lesson $lesson): self
     {
-        $this->lessons = $lessons;
+        if (!$this->lessons->contains($lesson)) {
+            $this->lessons[] = $lesson;
+        }
 
         return $this;
     }
+
+    public function removeLesson(Lesson $lesson): self
+    {
+        $this->lessons->removeElement($lesson);
+
+        return $this;
+    }
+
 }

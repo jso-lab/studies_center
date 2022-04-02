@@ -22,11 +22,6 @@ class BecomeStudentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-           $form->getData();
-           
-            $student->setPseudo('pseudo');
-            $student->setEmail('email');
-            $student->setPassword('password');
            
             $em->persist($student);
             $em->flush();

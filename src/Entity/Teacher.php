@@ -32,10 +32,6 @@ class Teacher implements  UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     private $profilPicture;
 
-
-    #[ORM\OneToMany(mappedBy: 'courses', targetEntity: Lesson::class)]
-    private $Lesson;
-
     #[ORM\OneToMany(mappedBy: 'teacher', targetEntity: Course::class)]
     private $courses;
 
@@ -101,36 +97,6 @@ class Teacher implements  UserInterface, PasswordAuthenticatedUserInterface
     public function setProfilPicture($profilPicture): self
     {
         $this->profilPicture = $profilPicture;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Lesson>
-     */
-    public function getLesson(): Collection
-    {
-        return $this->Lesson;
-    }
-
-    public function addLesson(Lesson $lesson): self
-    {
-        if (!$this->Lesson->contains($lesson)) {
-            $this->Lesson[] = $lesson;
-            $lesson->setCourses($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLesson(Lesson $lesson): self
-    {
-        if ($this->Lesson->removeElement($lesson) && ($lesson->getCourses() === $this)) {
-           
-          
-                $lesson->setCourses(null);
-            
-        }
 
         return $this;
     }

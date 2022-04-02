@@ -34,15 +34,6 @@ class DashboardController extends AbstractDashboardController
 
     #[IsGranted('ROLE_USER')]
 
-    public function dashboard(): Response
-    {
-        $url = $this->adminUrlGenerator
-            ->setController(CourseCrudController::class)
-            ->generateUrl();
-        return $this->redirect($url);
-
-    }
-
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
