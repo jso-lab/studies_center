@@ -10,13 +10,14 @@
 	
 <main class="container-fluid">
 
-<div class="container py-4 ">
-    <div class="p-4 mb-4 rounded-2">
-      <div class="container-fluid">
-        <h1 class="display-5 fw-bold pt-5">Eco IT</h1>
-          <p class="col-md-8 fs-4">Using a series of utilities, you can create this jumbotron, 
+<div class="row py-4 ">
+   
+    <div class="col-md-8 fs-4">
+        <h1 class="display-5 fw-bold pt-5">Des formations pour la planète</h1>
+          <p class="">Using a series of utilities, you can create this jumbotron, 
             just like the one in previous versions of Bootstrap. Check out the examples below for 
             how you can remix and restyle it to your liking.</p>
+
           <a href="{{ path('app_subscribe_as_teacher')}}">
             <button class="btn btn-primary btn-lg m-2"  type="button">Devenir instructeur</button>
           </a>
@@ -24,7 +25,8 @@
             <button class="btn btn-outline-success btn-lg m-2"  type="button">Devenir Apprenant</button>
           </a>
       </div>
-    </div>
+   <img class="img-responsive col-md-4"  src="{{ asset('images/logo-big.png')}}"  alt="logo - Eco IT" />
+    
 </div>
 
 <div class="container marketing">
@@ -35,6 +37,9 @@
       <div class="col-md-7">
         <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
         <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
+            <p>
+          <a href="{{ path('app_login')}}" class="btn btn-primary mt-5">Suivre la formations</a>
+        </p>
       </div>
       <div class="col-md-5">
         <img class="img-responsive" src="{{ asset('images/computer-plant.jpeg')}}" width="500" height="300" alt="" />
@@ -47,6 +52,9 @@
       <div class="col-md-6 order-md-2">
         <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
         <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
+            <p>
+          <a href="{{ path('app_login')}}" class="btn btn-success mt-5">Suivre la formations</a>
+        </p>
       </div>
       <div class="col-md-6 order-md-1">
         <img class="img-responsive" src="{{ asset('images/next-life.jpeg')}}" width="500" height="300" alt="" />
@@ -59,7 +67,11 @@
       <div class="col-md-7">
         <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
         <p class="lead">And yes, this is the last block of representative placeholder content. Again, not really intended to be actually read, simply here to give you a better view of what this would look like with some actual content. Your content.</p>
+          <p>
+          <a href="{{ path('app_login')}}" class="btn btn-primary mt-5">Suivre la formations</a>
+        </p>
       </div>
+    
       <div class="col-md-5">
         <img class="img-responsive" src="{{ asset('images/solar-panel.jpeg')}}" width="500" height="300" alt="" />
       </div>
@@ -68,6 +80,18 @@
     <hr class="featurette-divider">
 
   </div>
+   <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Les formations proposées</h1>
+        <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+        <p>
+          <a href="{{ path('app_login')}}" class="btn btn-primary my-2">Voir plus de formations</a>
+         
+        </p>
+      </div>
+    </div>
+  </section>
 </main>
 </div>
 
