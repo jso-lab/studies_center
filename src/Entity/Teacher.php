@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity(repositoryClass: TeacherRepository::class)]
 
 
-class Teacher implements  UserInterface, PasswordAuthenticatedUserInterface
+class Teacher  extends User implements  UserInterface, PasswordAuthenticatedUserInterface
 
 {
     #[ORM\Id]
@@ -149,36 +149,6 @@ class Teacher implements  UserInterface, PasswordAuthenticatedUserInterface
         return (string) $this->email;
     }
  
-    /**
-     * @see UserInterface
-     */
-    public function getSalt() : ?string
-    {
-        return null;
-    }
-
-    /**
-     * @see UserInterface
-     */
-
-    public function eraseCredentials()
-    {
-        //to clear any sensitive data
-        $this->plainPassword = null;
-    }
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        //guarantee that Admin has his role
-        return array_unique($roles);
-    }
-
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
 
     public function getPresentation(): ?string
     {

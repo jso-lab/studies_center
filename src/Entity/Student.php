@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: StudentRepository::class)]
 
-class Student implements UserInterface, PasswordAuthenticatedUserInterface
+class Student extends User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -94,24 +94,7 @@ class Student implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-  
-    /**
-     * @see UserInterface
-     */
-    public function getSalt() : ?string
-    {
-        return null;
-    }
 
-    /**
-     * @see UserInterface
-     */
-
-    public function eraseCredentials()
-    {
-        //to clear any sensitive data
-        $this->plainPassword = null;
-    }
     public function getRoles(): array
     {
         $roles = $this->roles;

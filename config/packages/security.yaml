@@ -32,7 +32,7 @@ security:
   access_control:
     #- { path: ^/admin, roles: ROLE_ADMIN }
     #- { path: ^/teacher, roles: ROLE_USER }
-    - { path: ^/student, roles: ROLE_USER }
+    #- { path: ^/student, roles: ROLE_USER }
 
 when@test:
   security:
