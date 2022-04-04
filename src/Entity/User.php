@@ -4,67 +4,28 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+
 
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 
-class User implements  UserInterface, PasswordAuthenticatedUserInterface
+class User
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $email;
-
-    #[ORM\Column(type: 'string', length: 255)]
-    private $password;
-
     #[ORM\Column(type: 'json')]
     private $roles = [];
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column(type: 'boolean', nullable: true)]
     private $isConnected;
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-     /**
-     * @see UserInterface
-     */
-    public function getUserIdentifier(): string
-    {
-        return (string) $this->email;
-    }
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
-
-
     /**
      * @see UserInterface
      */
@@ -104,10 +65,12 @@ class User implements  UserInterface, PasswordAuthenticatedUserInterface
         return $this->isConnected;
     }
 
-    public function setIsConnected(bool $isConnected): self
+    public function setIsConnected(?bool $isConnected): self
     {
         $this->isConnected = $isConnected;
 
         return $this;
     }
+
+   
 }

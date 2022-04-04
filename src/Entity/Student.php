@@ -18,7 +18,7 @@ class Student extends User implements UserInterface, PasswordAuthenticatedUserIn
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 200)]
+    #[ORM\Column(type: 'string', length: 255)]
     private $email;
 
     #[ORM\Column(type: 'string', length: 200)]
@@ -46,7 +46,7 @@ class Student extends User implements UserInterface, PasswordAuthenticatedUserIn
 
     public function getEmail(): ?string
     {
-        return $this->email;
+        return  $this->email;
     }
 
     public function setEmail(string $email): self
@@ -55,7 +55,6 @@ class Student extends User implements UserInterface, PasswordAuthenticatedUserIn
 
         return $this;
     }
-
     public function getPassword(): ?string
     {
         return $this->password;

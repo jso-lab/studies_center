@@ -18,7 +18,7 @@ class AppFixtures extends Fixture
         UserFactory::new([
             
             'email' => 'cam2lellis@gmail.com',
-            'plainPassword' => 'H4$$pw1'
+            'password' => 'H4$$pw1'
             ])
             ->promoteRole('ROLE_ADMIN')
             ->create();

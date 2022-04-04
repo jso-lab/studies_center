@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Teacher;
 
+
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -44,7 +45,7 @@ class SubscribeAsTeacherType extends AbstractType
             ])
          
             ->getForm(); 
-        ;
+        
     }
 
     public function configureOptions(OptionsResolver $resolver): void

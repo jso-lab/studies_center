@@ -78,6 +78,25 @@ class Teacher  extends User implements  UserInterface, PasswordAuthenticatedUser
 
         return $this;
     }
+     /**
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    public function getEmail(): ?string
+    {
+        return  $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
 
     public function getPassword(): ?string
     {
@@ -146,18 +165,6 @@ class Teacher  extends User implements  UserInterface, PasswordAuthenticatedUser
                 $course->setTeacher(null);
          
         }
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
 
         return $this;
     }

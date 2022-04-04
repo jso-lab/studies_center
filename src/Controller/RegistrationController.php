@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 
-use App\Entity\User;
+use App\Entity\Admin;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
@@ -12,9 +12,12 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
@@ -30,8 +33,8 @@ class RegistrationController extends AbstractController
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
-        $user = new User();
-        $plainPassword = ' ';
+        $user = new Admin();
+        $plaintextPassword = '...';
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -39,7 +42,7 @@ class RegistrationController extends AbstractController
             // encode the plain password
             $user->setPassword(
             $userPasswordHasher->hashPassword(
-                    $user, $plainPassword
+                    $user, $plaintextPassword
                 )
             );
 
@@ -81,7 +84,7 @@ class RegistrationController extends AbstractController
 
         // validate email confirmation link, sets User::isVerified=true and persists
         try {
-            $this->emailVerifier->handleEmailConfirmation($request ,$user);
+            $this->emailVerifier->handleEmailConfirmation($request, UserInterface $user);
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('verify_email_error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
 
@@ -91,5 +94,13 @@ class RegistrationController extends AbstractController
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('Félicitations !', 'Votre email est vérifiée.');
 
+    }
+    public function delete(UserPasswordHasherInterface $passwordHasher, PasswordAuthenticatedUserInterface $user)
+    {
+        $plaintextPassword = '...';
+
+        if (!$passwordHasher->isPasswordValid($user, $plaintextPassword)) {
+            throw new AccessDeniedHttpException();
+        }
     }
 }
