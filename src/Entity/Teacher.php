@@ -41,8 +41,8 @@ class Teacher  extends User implements  UserInterface, PasswordAuthenticatedUser
     #[ORM\Column(type: 'text', length: 255)]
     private $presentation;
 
-    #[ORM\Column(type: 'array')]
-    private $roles = [];
+    #[ORM\Column(type: 'json')]
+    private $roles;
 
     public function __construct()
     {

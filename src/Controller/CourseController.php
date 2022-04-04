@@ -34,7 +34,7 @@ class CourseController extends AbstractController
         }
 
         return $this->renderForm('course/new.html.twig', [
-            'course' => $course,
+            'une formation' => $course,
             'form' => $form,
         ]);
     }

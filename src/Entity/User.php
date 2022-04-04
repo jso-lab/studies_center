@@ -16,9 +16,6 @@ class User
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'array')]
-    private $roles = [];
-
     #[ORM\Column(type: 'boolean', nullable: true)]
     private $isConnected;
 

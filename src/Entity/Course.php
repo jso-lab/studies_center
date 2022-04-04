@@ -24,9 +24,6 @@ class Course
     #[ORM\Column(type: 'text')]
     private $description;
 
-    #[ORM\Column(type: 'array')]
-    private $sections = [];
-
     #[ORM\ManyToOne(targetEntity: Teacher::class, inversedBy: 'courses')]
     private $teacher;
 
@@ -67,18 +64,6 @@ class Course
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getSections(): ?array
-    {
-        return $this->sections;
-    }
-
-    public function setSections(array $sections): self
-    {
-        $this->sections = $sections;
 
         return $this;
     }
