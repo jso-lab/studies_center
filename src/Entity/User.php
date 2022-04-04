@@ -26,6 +26,9 @@ class User implements  UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'json')]
     private $roles = [];
 
+    #[ORM\Column(type: 'boolean')]
+    private $isConnected;
+
     public function getEmail(): ?string
     {
         return $this->email;
@@ -67,8 +70,7 @@ class User implements  UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getRoles(): array
     {
-        $roles =  $this->roles;
-        // guarantee every user at least has ROLE_USER
+       
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
@@ -95,5 +97,17 @@ class User implements  UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         $this->plainPassword = null;
+    }
+
+    public function getIsConnected(): ?bool
+    {
+        return $this->isConnected;
+    }
+
+    public function setIsConnected(bool $isConnected): self
+    {
+        $this->isConnected = $isConnected;
+
+        return $this;
     }
 }

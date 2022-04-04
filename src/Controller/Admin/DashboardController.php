@@ -22,7 +22,7 @@ class DashboardController extends AbstractDashboardController
     }
 
     #[Route('/admin', name: 'admin')]
-   // #[IsGranted('ROLE_USER')]
+   #[IsGranted('ROLE_ADMIN')]
 
     public function dashboard() : Response
     {
@@ -35,7 +35,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            // the name visible to end users
+           
             ->setTitle('Eco IT - Admin Center');
     }
     public function configureMenuItems(): iterable

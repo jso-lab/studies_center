@@ -27,8 +27,8 @@ class Student extends User implements UserInterface, PasswordAuthenticatedUserIn
     #[ORM\Column(type: 'array', nullable: true)]
     private $courses = [];
 
-    #[ORM\Column(type: 'json')]
-    private $roles;
+    #[ORM\Column(type: 'array')]
+    private $roles = [];
 
     #[ORM\Column(type: 'string', length: 255)]
     private $pseudo;
@@ -85,7 +85,6 @@ class Student extends User implements UserInterface, PasswordAuthenticatedUserIn
 
     public function getRoles(): array
     {
-        $roles = $this->roles;
         
         $roles[] = 'ROLE_USER';
 

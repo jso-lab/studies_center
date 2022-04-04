@@ -25,14 +25,17 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 60)]
     private $password;
 
-    #[ORM\Column(type: 'json')]
-    private $roles = [];
+    #[ORM\Column(type: 'array')]
+    private $roles;
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
     #[ORM\Column(type: 'object', nullable: true)]
     private $messages;
+
+    #[ORM\Column(type: 'boolean')]
+    private $isConnected;
 
     public function getId(): ?int
     {
@@ -95,13 +98,11 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
-    public function getRoles(): array
+    public function getRoles() : array
     {
-        $roles =  $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_ADMIN';
-
-        return array_unique($roles);
+    
+       return ['ROLE_ADMIN'];
+       
     }
 
     public function setRoles(array $roles): self
@@ -131,6 +132,18 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     public function setMessages($messages): self
     {
         $this->messages = $messages;
+
+        return $this;
+    }
+
+    public function getIsConnected(): ?bool
+    {
+        return $this->isConnected;
+    }
+
+    public function setIsConnected(bool $isConnected): self
+    {
+        $this->isConnected = $isConnected;
 
         return $this;
     }
