@@ -26,13 +26,10 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     #[ORM\Column(type: 'array')]
-    private $roles;
+    private $roles = [];
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
-
-    #[ORM\Column(type: 'object', nullable: true)]
-    private $messages;
 
     #[ORM\Column(type: 'boolean')]
     private $isConnected;
@@ -120,18 +117,6 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
-
-        return $this;
-    }
-
-    public function getMessages()
-    {
-        return $this->messages;
-    }
-
-    public function setMessages($messages): self
-    {
-        $this->messages = $messages;
 
         return $this;
     }

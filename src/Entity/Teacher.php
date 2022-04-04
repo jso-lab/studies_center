@@ -42,7 +42,7 @@ class Teacher  extends User implements  UserInterface, PasswordAuthenticatedUser
     private $presentation;
 
     #[ORM\Column(type: 'array')]
-    private $roles;
+    private $roles = [];
 
     public function __construct()
     {
@@ -128,9 +128,9 @@ class Teacher  extends User implements  UserInterface, PasswordAuthenticatedUser
     public function getRoles(): array
     {
        
-        $roles[] = 'ROLE_USER';
+        return ['ROLE_USER'];
 
-        return array_unique($roles);
+      
     }
 
     public function setRoles(array $roles): self

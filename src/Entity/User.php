@@ -16,7 +16,7 @@ class User
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'json')]
+    #[ORM\Column(type: 'array')]
     private $roles = [];
 
     #[ORM\Column(type: 'boolean', nullable: true)]
@@ -32,9 +32,7 @@ class User
     public function getRoles(): array
     {
        
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
+        return ['ROLE_USER'];
     }
 
     public function setRoles(array $roles): self
