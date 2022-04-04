@@ -23,14 +23,14 @@ class DashboardController extends AbstractDashboardController
      //#[IsGranted('ROLE_ADMIN')]
     #[Route('/admin', name: 'admin')]
 
-    public function index(): Response
+    public function dashboard(): Response
     {
-        $url = $this->adminUrlGenerator
+       $url = $this->adminUrlGenerator
         ->setController(TeacherCrudController::class)
         ->generateUrl();
         return $this->redirect($url);
-        
     }
+    
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
@@ -44,10 +44,6 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::subMenu('Teachers', 'fa fa-align-justify')->setSubItems([
                 MenuItem::linkToCrud('Create Teacher', 'fas fa-plus', Teacher::class)->setAction(Crud::PAGE_NEW),
                 MenuItem::linkToCrud('Show Teachers', 'fas fa-eye', Teacher::class)
-            ]),
-                MenuItem::subMenu('Messages', 'fa fa-envelope')->setSubItems([
-                MenuItem::section('Create message', 'fas fa-plus'),
-                MenuItem::section('Show messages', 'fas fa-eye')
             ]),
                 MenuItem::section('Settings', 'fa fa-gear')
         ];

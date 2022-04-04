@@ -127,10 +127,7 @@ class Teacher  extends User implements  UserInterface, PasswordAuthenticatedUser
      */
     public function getRoles(): array
     {
-       
-        return ['ROLE_USER'];
-
-      
+        return ['ROLE_USER']; 
     }
 
     public function setRoles(array $roles): self

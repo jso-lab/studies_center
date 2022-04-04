@@ -5,14 +5,13 @@ namespace App\Entity;
 use App\Repository\AdminRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+
 
 #[ORM\Entity(repositoryClass: AdminRepository::class)]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'Un compte existe déjà avec cette adresse')]
 
 
-class Admin implements UserInterface, PasswordAuthenticatedUserInterface
+class Admin 
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -25,14 +24,8 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 60)]
     private $password;
 
-    #[ORM\Column(type: 'array')]
-    private $roles = [];
-
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
-
-    #[ORM\Column(type: 'boolean')]
-    private $isConnected;
 
     public function getId(): ?int
     {
@@ -91,24 +84,6 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
         $this->plainPassword = null;
     }
 
-   
-    /**
-     * @see UserInterface
-     */
-    public function getRoles() : array
-    {
-    
-       return ['ROLE_ADMIN'];
-       
-    }
-
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
     public function isVerified(): bool
     {
         return $this->isVerified;
@@ -121,15 +96,4 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getIsConnected(): ?bool
-    {
-        return $this->isConnected;
-    }
-
-    public function setIsConnected(bool $isConnected): self
-    {
-        $this->isConnected = $isConnected;
-
-        return $this;
-    }
 }

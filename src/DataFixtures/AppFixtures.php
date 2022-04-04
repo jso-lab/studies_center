@@ -24,5 +24,6 @@ class AppFixtures extends Fixture
             ->create();
            
             $manager->flush();
+        
     }
 }
