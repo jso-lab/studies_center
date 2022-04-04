@@ -32,9 +32,6 @@ class DashboardController extends AbstractDashboardController
         return $this->redirect($url);
         
     }
-
-    #[IsGranted('ROLE_USER')]
-
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()

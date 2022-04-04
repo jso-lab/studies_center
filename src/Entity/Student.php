@@ -27,9 +27,8 @@ class Student extends User implements UserInterface, PasswordAuthenticatedUserIn
     #[ORM\Column(type: 'array', nullable: true)]
     private $courses = [];
 
-    #[ORM\ManyToOne(targetEntity: Roles::class, inversedBy: 'teachers')]
-    #[ORM\JoinColumn(nullable: true)]
-    private $role;
+    #[ORM\Column(type: 'json')]
+    private $roles;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $pseudo;
@@ -83,30 +82,14 @@ class Student extends User implements UserInterface, PasswordAuthenticatedUserIn
     {
         return $this->courses;
     }
-    public function getRole(): ?Roles
-    {
-        return $this->role;
-    }
-
-    public function setRole(?Roles $role): self
-    {
-        $this->role = $role;
-
-        return $this;
-    }
 
     public function getRoles(): array
     {
         $roles = $this->roles;
-        //guarantee that Admin has his role
+        
+        $roles[] = 'ROLE_USER';
+
         return array_unique($roles);
-    }
-      /**
-     * @see UserInterface
-     */
-    public function getUserIdentifier(): string
-    {
-        return (string) $this->email;
     }
 
     public function setRoles(array $roles): self
@@ -114,6 +97,13 @@ class Student extends User implements UserInterface, PasswordAuthenticatedUserIn
         $this->roles = $roles;
 
         return $this;
+    }
+      /**
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
     }
 
     public function getPseudo(): ?string

@@ -25,6 +25,9 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 60)]
     private $password;
 
+    #[ORM\Column(type: 'json')]
+    private $roles = [];
+
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
@@ -88,10 +91,16 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
         $this->plainPassword = null;
     }
 
+   
+    /**
+     * @see UserInterface
+     */
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        //guarantee that Admin has his role
+        $roles =  $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_ADMIN';
+
         return array_unique($roles);
     }
 

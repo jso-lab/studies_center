@@ -41,6 +41,9 @@ class Teacher  extends User implements  UserInterface, PasswordAuthenticatedUser
     #[ORM\Column(type: 'text', length: 255)]
     private $presentation;
 
+    #[ORM\Column(type: 'json')]
+    private $roles = [];
+
 
     public function __construct()
     {
@@ -97,6 +100,25 @@ class Teacher  extends User implements  UserInterface, PasswordAuthenticatedUser
     public function setProfilPicture($profilPicture): self
     {
         $this->profilPicture = $profilPicture;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles =  $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }

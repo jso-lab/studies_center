@@ -1,15 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% include 'navigation.html.twig'%}
+{% block title %}Enregistrement{% endblock %}
 
-<h1>Bonjour !</h1>
+{% block body %}
 
-<p>
-    Merci de confirmer votre adresse mail en suivant ce lien: <br><br>
-    <a href="{{ signedUrl }}">Confirmer mon adresse</a>.
-   Ce lien expire dans {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
-</p>
 
-<p>
-    Cordialement !
-</p>
+<main class=" container py-5 text-center">
+        <h1>Bonjour !</h1>
+
+        <p>
+            Merci de confirmer votre adresse mail en suivant ce lien: <br><br>
+            <a href="{{ signedUrl }}">Confirmer mon adresse</a>.
+        Ce lien expire dans {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+        </p>
+
+        <p>
+            Cordialement !
+        </p>
+</main>
+
+{% endblock %}

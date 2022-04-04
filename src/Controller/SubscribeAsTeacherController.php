@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class SubscribeAsTeacherController extends AbstractController
@@ -15,7 +16,7 @@ class SubscribeAsTeacherController extends AbstractController
     #[Route('/subscribe/as/teacher', name: 'app_subscribe_as_teacher')]
 
    
-    public function new( EntityManagerInterface $em, Request $request) : Response
+    public function new( EntityManagerInterface $em, Request $request, UserPasswordHasherInterface $userPasswordHasher,) : Response
     {   
         $teacher = new Teacher();
         
@@ -24,6 +25,12 @@ class SubscribeAsTeacherController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $teacher->setPassword(
+                $userPasswordHasher->hashPassword(
+                        $teacher,
+                        $form->get('plainPassword')->getData()
+                )
+                );
             $em->persist($teacher);
             $em->flush();
 

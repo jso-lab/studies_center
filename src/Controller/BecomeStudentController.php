@@ -8,13 +8,14 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BecomeStudentController extends AbstractController
 {
     #[Route('/become/student', name: 'app_become_student')]
 
-    public function index(EntityManagerInterface $em, Request $request) : Response
+    public function index(EntityManagerInterface $em, Request $request, UserPasswordHasherInterface $userPasswordHasher) : Response
     {
         $student = new Student();
         
@@ -22,7 +23,13 @@ class BecomeStudentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-           
+          
+            $student->setPassword(
+                $userPasswordHasher->hashPassword(
+                        $student,
+                        $form->get('plainPassword')->getData()
+                )
+                );
             $em->persist($student);
             $em->flush();
 
