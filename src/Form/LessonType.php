@@ -15,7 +15,7 @@ class LessonType extends AbstractType
             ->add('video')
             ->add('description')
             ->add('files')
-            ->add('courses')
+            ->add('section')
         ;
     }
 

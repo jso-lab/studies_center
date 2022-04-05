@@ -23,6 +23,9 @@ class Lesson
     #[ORM\Column(type: 'blob', nullable: true)]
     private $files;
 
+    #[ORM\ManyToOne(targetEntity: Section::class, inversedBy: 'title')]
+    private $section;
+
     public function __construct()
     {
         $this->sections = new ArrayCollection();
@@ -65,6 +68,18 @@ class Lesson
     public function setFiles($files): self
     {
         $this->files = $files;
+
+        return $this;
+    }
+
+    public function getSection(): ?Section
+    {
+        return $this->section;
+    }
+
+    public function setSection(?Section $section): self
+    {
+        $this->section = $section;
 
         return $this;
     }
