@@ -13,10 +13,25 @@ class Section
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    #[ORM\ManyToOne(targetEntity: Course::class, inversedBy: 'sections')]
+    private $lessons;
+
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getLessons(): ?Course
+    {
+        return $this->lessons;
+    }
+
+    public function setLessons(?Course $lessons): self
+    {
+        $this->lessons = $lessons;
+
+        return $this;
     }
 
 }

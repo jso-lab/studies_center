@@ -27,6 +27,9 @@ class Admin
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private $isConnected;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,6 +95,17 @@ class Admin
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+    public function getIsConnected(): ?bool
+    {
+        return $this->isConnected;
+    }
+
+    public function setIsConnected(?bool $isConnected): self
+    {
+        $this->isConnected = $isConnected;
 
         return $this;
     }
