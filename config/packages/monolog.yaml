@@ -34,7 +34,7 @@ when@test:
         channels: ['!event']
       nested:
         type: stream
-        path: php://stderr
+        path: 'php://stderr'
         level: debug
 
 when@prod:
