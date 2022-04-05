@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
          <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,10 +7,13 @@
         <title>{% block title %}Eco IT - Des formations pour la planête{% endblock %}</title>
         {#{% block stylesheets %}{{ encore_entry_link_tags('app') }} {% endblock %}#}
         {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('build/app.css') }}" {% endblock %}
+            <link rel="stylesheet" href="{{ asset('build/app.css') }}"> 
+        {% endblock %}
     </head>
     <body>
         {% block body %}{% endblock %}
-        {% block javascript %} {{ encore_entry_script_tags('app') }} {% endblock %}
+        {% block javascript %} 
+            {{ encore_entry_script_tags('app') }} 
+        {% endblock %}
     </body>
 </html>
