@@ -23,11 +23,12 @@ class TeacherCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')->hideOnForm(),
+            IdField::new('id'),
             TextField::new('firstName', 'Nom'),
             TextField::new('lastName', 'Prénom'),
             TextField::new('email', 'Adresse mail'),
             TextField::new('password', 'Mot de passe'),
+            TextField::new('presentation', 'Spécialités'),
             ImageField::new('profilPicture', 'Photo de profil')
                 ->setBasePath(self::TEACHERS_BASE_PATH)
                 ->setUploadDir(self::TEACHERS_UPLOAD_DIR)

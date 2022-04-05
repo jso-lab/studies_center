@@ -5,14 +5,14 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-
-
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'Un compte avec cette adresse existe déjà...')]
 
 
-class User
+class User  implements  UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -24,6 +24,9 @@ class User
 
     #[ORM\Column(type: 'string', length: 255)]
     private $password;
+
+    #[ORM\Column(type: 'json')]
+    private $roles = [];
 
     #[ORM\Column(type: 'boolean', nullable: true)]
     private $isConnected;
@@ -72,7 +75,7 @@ class User
     public function getRoles(): array
     {
        
-        return ['ROLE_USER'];
+        return array('ROLE_USER');
     }
 
     public function setRoles(array $roles): self

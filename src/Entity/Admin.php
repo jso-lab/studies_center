@@ -5,13 +5,15 @@ namespace App\Entity;
 use App\Repository\AdminRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 
 #[ORM\Entity(repositoryClass: AdminRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'Un compte existe déjà avec cette adresse')]
 
 
-class Admin 
+class Admin implements PasswordAuthenticatedUserInterface, UserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -23,6 +25,9 @@ class Admin
 
     #[ORM\Column(type: 'string', length: 60)]
     private $password;
+
+    #[ORM\Column(type: 'json')]
+    private $roles = [];
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
@@ -65,6 +70,19 @@ class Admin
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+    public function getRoles(): array
+    {
+        
+        return array('ROLE_ADMIN');
+
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }
