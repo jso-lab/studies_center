@@ -4,12 +4,15 @@ namespace App\Entity;
 
 use App\Repository\StudentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: StudentRepository::class)]
+#[UniqueEntity(fields: ['email'], message: 'Un compte avec cette adresse existe déjà...')]
 
 class Student extends User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -19,16 +22,22 @@ class Student extends User implements UserInterface, PasswordAuthenticatedUserIn
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Email(message : "Ceci '{{ value }}' n\'est pas valide.")]
     private $email;
 
     #[ORM\Column(type: 'string', length: 200)]
+    #[Assert\Length(
+        min : "8",
+        message : "Le mot de passe doit contenir au minimum {{ limit }} caractères.")]
     private $password;
+
+    #[Assert\EqualTo(
+        propertyPath:"password",
+        message : "Les mots de passe sont différents...")]
+    public $confirm_plainPassword;
 
     #[ORM\Column(type: 'array', nullable: true)]
     private $courses = [];
-
-    #[ORM\Column(type: 'json')]
-    private $roles = [];
 
     #[ORM\Column(type: 'string', length: 255)]
     private $pseudo;

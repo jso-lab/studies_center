@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Espace de gestion{% endblock %}
+{% block title %}Inscription sur le site {% endblock %}
 
 {% block body %}
     {% for flash_error in app.flashes('verify_email_error') %}
@@ -13,20 +13,30 @@
 
 <main class="container py-5">
 
-    <h1 class="mb-5 fw-normal">Espace d'administration</h1>
+    <h1 class="mb-5 fw-normal">Inscription</h1>
 
     {{ form_start(registrationForm) }}
+
+
+        {{ form_row(registrationForm.username, {
+            label: 'Pseudo'
+        }) }}
+
         {{ form_row(registrationForm.email, {
             label: 'E-mail'
         }) }}
         {{ form_row(registrationForm.plainPassword, {
             label: 'Mot de passe'
         }) }}
+          {{ form_row(registrationForm.confirm_plainPassword, {
+            label: 'Confirmez le Mot de passe'
+        }) }}
         {{ form_row(registrationForm.agreeTerms, {
             label: 'J\'accepte les conditions d\'utilisation '
         }) }}
 
-        <button type="submit" class="btn btn-primary">S'enregistrer</button>
+        <button type="submit" class="btn btn-success">S'enregistrer</button>
+
     {{ form_end(registrationForm) }}
 
 </main>

@@ -26,15 +26,6 @@ class Admin implements PasswordAuthenticatedUserInterface, UserInterface
     #[ORM\Column(type: 'string', length: 60)]
     private $password;
 
-    #[ORM\Column(type: 'json')]
-    private $roles = [];
-
-    #[ORM\Column(type: 'boolean')]
-    private $isVerified = false;
-
-    #[ORM\Column(type: 'boolean', nullable: true)]
-    private $isConnected;
-
     public function getId(): ?int
     {
         return $this->id;

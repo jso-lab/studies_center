@@ -34,6 +34,9 @@ class SubscribeAsTeacherType extends AbstractType
             ->add('password', PasswordType::class, [
                 'label' => 'Mot de passe' 
             ])
+            ->add('confirm_plainPassword', PasswordType::class, [
+                'label' => 'Confirmer le mot de passe' 
+            ])
             ->add('profilPicture', FileType::class,[ 
              'label' => 'Photo de profil'  
             ])

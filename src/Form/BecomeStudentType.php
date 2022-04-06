@@ -24,6 +24,9 @@ class BecomeStudentType extends AbstractType
             ->add('password', PasswordType::class, [
                 'label' => 'Mot de passe'
             ])
+            ->add('confirm_plainPassword', PasswordType::class, [
+                'label' => 'confirmer le mot de passe' 
+            ])
             ->add('pseudo', TextType::class, [
                 'label' => 'Pseudo'
             ])

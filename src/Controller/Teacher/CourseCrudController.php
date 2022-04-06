@@ -26,11 +26,10 @@ class CourseCrudController extends AbstractCrudController
         return [
             IdField::new('id'),
             TextField::new('description'),
-            ImageField::new('video')
+            ImageField::new('illustration')
                 ->setBasePath(self::COURSES_BASE_PATH)
                 ->setUploadDir(self::COURSES_UPLOAD_DIR),
-            CollectionField::new('files'),
-            TextField::new('sections')
+           
             
         ];
     }
