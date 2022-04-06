@@ -6,7 +6,6 @@ use App\Repository\TeacherRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -30,14 +29,11 @@ class Teacher  extends User implements  UserInterface, PasswordAuthenticatedUser
     private $lastName;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(
-        min : "8",
-        message : "Le mot de passe doit contenir au minimum 8 caractères.")]
-    private $password;
+    private $email;
 
-    #[Assert\EqualTo(
-        propertyPath:"password",
-        message : "Les mots de passe sont différents...")]
+    #[ORM\Column(type: 'string', length: 255)]
+    private $password;
+    
     public $confirm_plainPassword;
 
     #[ORM\Column(type: 'string')]
@@ -45,10 +41,6 @@ class Teacher  extends User implements  UserInterface, PasswordAuthenticatedUser
 
     #[ORM\OneToMany(mappedBy: 'teacher', targetEntity: Course::class)]
     private $courses;
-
-    #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Email(minMessage : "Ceci '{{ value }}' n\'est pas valide.")]
-    private $email;
 
     #[ORM\Column(type: 'text', length: 255)]
     private $presentation;
@@ -87,14 +79,9 @@ class Teacher  extends User implements  UserInterface, PasswordAuthenticatedUser
 
         return $this;
     }
-     /**
+      /**
      * @see UserInterface
      */
-    public function getUserIdentifier(): string
-    {
-        return (string) $this->email;
-    }
-
     public function getEmail(): ?string
     {
         return  $this->email;
@@ -105,6 +92,13 @@ class Teacher  extends User implements  UserInterface, PasswordAuthenticatedUser
         $this->email = $email;
 
         return $this;
+    }
+     /**
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
     }
 
     public function getPassword(): ?string
@@ -136,7 +130,7 @@ class Teacher  extends User implements  UserInterface, PasswordAuthenticatedUser
      */
     public function getRoles(): array
     {
-        return array('ROLE_USER'); 
+        return array('ROLE_TEACHER'); 
     }
 
     public function setRoles(array $roles): self

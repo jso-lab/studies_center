@@ -88,8 +88,5 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/logout', name: 'app_logout')]
-    public function logout() 
-    {
-        return $this->render('logout/index.html.twig');
-    }
+    public function logout() {}
 }

@@ -22,18 +22,11 @@ class Student extends User implements UserInterface, PasswordAuthenticatedUserIn
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Email(message : "Ceci '{{ value }}' n\'est pas valide.")]
     private $email;
 
     #[ORM\Column(type: 'string', length: 200)]
-    #[Assert\Length(
-        min : "8",
-        message : "Le mot de passe doit contenir au minimum {{ limit }} caractères.")]
     private $password;
 
-    #[Assert\EqualTo(
-        propertyPath:"password",
-        message : "Les mots de passe sont différents...")]
     public $confirm_plainPassword;
 
     #[ORM\Column(type: 'array', nullable: true)]
@@ -52,7 +45,9 @@ class Student extends User implements UserInterface, PasswordAuthenticatedUserIn
     {
         return $this->id;
     }
-
+     /**
+     * @see UserInterface
+     */
     public function getEmail(): ?string
     {
         return  $this->email;
@@ -94,7 +89,7 @@ class Student extends User implements UserInterface, PasswordAuthenticatedUserIn
     public function getRoles(): array
     {
         
-        return array('ROLE_USER');
+        return array('ROLE_STUDENT');
 
     }
 

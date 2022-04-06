@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
 
 
 class SubscribeAsTeacherType extends AbstractType
@@ -22,6 +23,7 @@ class SubscribeAsTeacherType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+           
             ->add('firstName', TextType::class,[
                 'label' => 'Nom'
             ])
@@ -32,22 +34,29 @@ class SubscribeAsTeacherType extends AbstractType
                 'label' => 'E-mail' 
             ])
             ->add('password', PasswordType::class, [
-                'label' => 'Mot de passe' 
+                'label' => 'Mot de passe',
+                'constraints' => [
+                    new Length([
+                        'min' => 6,
+                        'minMessage' => 'Le mot doit contenir au moins {{ limit }} caractères',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 255,
+                    ]),
+                ],
+            
             ])
-            ->add('confirm_plainPassword', PasswordType::class, [
-                'label' => 'Confirmer le mot de passe' 
-            ])
+    
             ->add('profilPicture', FileType::class,[ 
-             'label' => 'Photo de profil'  
+             'label' => 'Définissez un avatar'  
             ])
             ->add('presentation', TextareaType::class,[
                 'label' => 'Vos spécialités'  
             ])
             ->add('Envoyer', SubmitType::class, [
-                'label' => 'Envoyer'
+                'label' => 'Soumettre le formulaire'
             ])
          
-            ->getForm(); 
+        ; 
         
     }
 
