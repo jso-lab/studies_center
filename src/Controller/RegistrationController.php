@@ -53,7 +53,7 @@ class RegistrationController extends AbstractController
             );
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('registration/register.html.twig', [
@@ -78,6 +78,18 @@ class RegistrationController extends AbstractController
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('Félicitations !!', 'Votre adresse mail a été verifiée !.');
 
-        return $this->redirectToRoute('app_register');
+        return $this->redirectToRoute('app_login');
+    }
+
+    #[Route('/login', name: 'app_login')]
+    public function login() 
+    {
+        return $this->render('login/index.html.twig');
+    }
+
+    #[Route('/logout', name: 'app_logout')]
+    public function logout() 
+    {
+        return $this->render('logout/index.html.twig');
     }
 }

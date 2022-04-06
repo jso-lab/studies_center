@@ -3,9 +3,6 @@
 {% block title %}Se connecter - Eco IT - Des formations pour la planête{% endblock %}
 
 {% block body %}
-  {% if error %}
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-  {% endif %}
 
 <link href="{{ asset('css/sign.css')}}" rel="stylesheet" />
 
@@ -19,11 +16,11 @@
     <h1 class="h3 mb-5 fw-normal">Merci de vous connecter</h1>
 
     <div class="form-floating my-3">
-      <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" />
-      <label for="username">E-mail</label>
+      <input type="text" class="form-control" required name="_username" />
+      <label for="username">Identifiant</label>
     </div>
     <div class="form-floating my-3">
-      <input type="password" class="form-control" id="password" name="_password" />
+      <input type="password" class="form-control" required name="_password" />
       <label for="password">Mot de passe</label>
     </div>
 

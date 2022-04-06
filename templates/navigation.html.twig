@@ -24,11 +24,15 @@
 							<a class="nav-link " aria-current="page" href="{{ path('app_about')}}"><h5>A propos</h5></a>		
 						</li>
 					</ul>
-				
-						<a href="{{ path('app_login')}}"><button type="button" class="btn btn-outline-success"><h6>Connexion</h6></button></a>
-				
-						{#<a href="{{ path('app_logout')}}"><button type="button" class="btn btn-outline-success"><h6>Déconnexion</h6></button></a>#}
-				
+					{% if not app.user %}
+					<div class="px-3">	
+						<a href="{{ path('app_login')}}"><button type="button" class="btn btn-outline-secondary"><h6>Connexion</h6></button></a>
+					</div>
+					{% else %}
+					<div class="px-3">	
+						<a href="{{ path('app_logout')}}"><button type="button" class="btn btn-outline-primary"><h6>Déconnexion</h6></button></a>
+					</div>
+					{% endif %}
 				</div>
 			</div>
 		</nav>
