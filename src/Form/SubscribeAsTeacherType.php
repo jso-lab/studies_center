@@ -34,6 +34,7 @@ class SubscribeAsTeacherType extends AbstractType
                 'label' => 'E-mail' 
             ])
             ->add('password', PasswordType::class, [
+                'mapped' => false,
                 'label' => 'Mot de passe',
                 'constraints' => [
                     new Length([
@@ -63,8 +64,7 @@ class SubscribeAsTeacherType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Teacher::class,
-            'invalid_message' => 'Erreur dans le formulaire',
+            'data_class' => Teacher::class
         ]);
     }
 }

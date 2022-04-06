@@ -27,8 +27,8 @@ class BecomeStudentType extends AbstractType
             
             ])
             ->add('password', PasswordType::class, [
+                'mapped' => false,
                 'label' => 'Mot de passe',
-            
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
@@ -43,6 +43,7 @@ class BecomeStudentType extends AbstractType
                 ],
             ])
             ->add('confirm_plainPassword', PasswordType::class, [
+                'mapped' => false,
                 'label' => 'confirmer le mot de passe',
                 'attr' => ['autocomplete' => 'renew-password'],
                 'constraints' => [
