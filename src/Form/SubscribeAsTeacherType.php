@@ -30,7 +30,7 @@ class SubscribeAsTeacherType extends AbstractType
             ->add('lastName', TextType::class,[
                 'label' =>'Prénom', 
             ])
-            ->add('email', EmailType::class,[  
+            ->add('username', EmailType::class,[  
                 'label' => 'E-mail' 
             ])
             ->add('password', PasswordType::class, [

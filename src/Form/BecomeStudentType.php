@@ -19,10 +19,10 @@ class BecomeStudentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('pseudo', TextType::class, [
+            ->add('Pseudo', TextType::class, [
                 'label' => 'Pseudo'
             ])
-            ->add('email', EmailType::class, [
+            ->add('username', EmailType::class, [
                 'label' => 'E-mail'
             
             ])

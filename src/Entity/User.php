@@ -19,7 +19,10 @@ class User  implements  UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', nullable: true, length: 255)]
+    private $pseudo;
+
+    #[ORM\Column(type: 'string', nullable: true, length: 255)]
     private $email;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -48,6 +51,20 @@ class User  implements  UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+     /**
+     * @see UserInterface
+     */
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
+
+        return $this;
+    }
        /**
      * @see UserInterface
      */
@@ -55,7 +72,9 @@ class User  implements  UserInterface, PasswordAuthenticatedUserInterface
     {
         return (string) $this->email;
     }
-
+      /**
+     * @see UserInterface
+     */
     public function getEmail(): ?string
     {
         return  $this->email;
@@ -67,26 +86,24 @@ class User  implements  UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
+      /**
+     * @see UserInterface
+     */
     public function getPassword(): ?string
     {
         return $this->password;
     }
-
     public function setPassword(string $password): self
     {
         $this->password = $password;
 
         return $this;
     }
-  
-    /**
-     * @see UserInterface
-     */
+ 
     public function getRoles(): array
     {
-       
-        return array('ROLE_USER');
+
+        return array();
     }
 
     public function setRoles(array $roles): self

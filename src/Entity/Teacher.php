@@ -6,12 +6,11 @@ use App\Repository\TeacherRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: TeacherRepository::class)]
-#[UniqueEntity(fields: ['email'], message: 'Un compte avec cette adresse existe déjà...')]
+
 
 
 class Teacher  extends User implements  UserInterface, PasswordAuthenticatedUserInterface
@@ -27,14 +26,6 @@ class Teacher  extends User implements  UserInterface, PasswordAuthenticatedUser
 
     #[ORM\Column(type: 'string', length: 255)]
     private $lastName;
-
-    #[ORM\Column(type: 'string', length: 255)]
-    private $email;
-
-    #[ORM\Column(type: 'string', length: 255)]
-    private $password;
-    
-    public $confirm_plainPassword;
 
     #[ORM\Column(type: 'string')]
     private $profilPicture;
@@ -79,38 +70,12 @@ class Teacher  extends User implements  UserInterface, PasswordAuthenticatedUser
 
         return $this;
     }
-      /**
-     * @see UserInterface
-     */
-    public function getEmail(): ?string
-    {
-        return  $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
      /**
      * @see UserInterface
      */
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
     }
 
     public function getProfilPicture()
@@ -125,9 +90,6 @@ class Teacher  extends User implements  UserInterface, PasswordAuthenticatedUser
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function getRoles(): array
     {
         return array('ROLE_TEACHER'); 
