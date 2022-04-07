@@ -50,7 +50,7 @@ class Student extends User implements UserInterface, PasswordAuthenticatedUserIn
     public function getRoles(): array
     {
         
-        return array('ROLE_STUDENT');
+        return array('ROLE_USER');
 
     }
 

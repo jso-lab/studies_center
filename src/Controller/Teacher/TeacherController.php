@@ -29,14 +29,7 @@ class TeacherController extends AbstractDashboardController
         ->generateUrl();
         return $this->redirect($url);
 
-      
-        // if ('jane' === $this->getUser()->getUsername()) {
-        //     return $this->redirect('...');
-        // }
-
-        // return $this->render('some/path/my-dashboard.html.twig');
-    
-        }
+    }
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()

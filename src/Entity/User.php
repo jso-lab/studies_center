@@ -103,7 +103,7 @@ class User  implements  UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
 
-        return array();
+        return array('ROLE_USER');
     }
 
     public function setRoles(array $roles): self

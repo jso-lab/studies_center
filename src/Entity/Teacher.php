@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\TeacherRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -30,17 +28,9 @@ class Teacher  extends User implements  UserInterface, PasswordAuthenticatedUser
     #[ORM\Column(type: 'string')]
     private $profilPicture;
 
-    #[ORM\OneToMany(mappedBy: 'teacher', targetEntity: Course::class)]
-    private $courses;
-
     #[ORM\Column(type: 'text', length: 255)]
     private $presentation;
 
-    public function __construct()
-    {
-        $this->Lesson = new ArrayCollection();
-        $this->courses = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -92,41 +82,12 @@ class Teacher  extends User implements  UserInterface, PasswordAuthenticatedUser
 
     public function getRoles(): array
     {
-        return array('ROLE_TEACHER'); 
+        return array('ROLE_USER'); 
     }
 
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Course>
-     */
-    public function getCourses(): Collection
-    {
-        return $this->courses;
-    }
-
-    public function addCourse(Course $course): self
-    {
-        if (!$this->courses->contains($course)) {
-            $this->courses[] = $course;
-            $course->setTeacher($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCourse(Course $course): self
-    {
-        if ($this->courses->removeElement($course) && ($course->getTeacher() === $this)) {
-          
-                $course->setTeacher(null);
-         
-        }
 
         return $this;
     }

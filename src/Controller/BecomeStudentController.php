@@ -33,6 +33,8 @@ class BecomeStudentController extends AbstractController
                 ); 
             $em->persist($student);
             $em->flush();
+
+            return $this->redirectToRoute('app_form_validated');
         }
         return $this->renderForm('become_student/index.html.twig', [
             'form' => $form,

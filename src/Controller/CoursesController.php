@@ -9,8 +9,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CoursesController extends AbstractController
 {
-    #[IsGranted('ROLE_STUDENT')]
-    #[IsGranted('ROLE_TEACHER')]
+    #[IsGranted('ROLE_USER')]
+  
     #[Route('/courses', name: 'app_courses')]
     public function index(): Response
     {

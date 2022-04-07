@@ -26,9 +26,6 @@ class Course
     #[ORM\Column(type: 'text')]
     private $description;
 
-    #[ORM\ManyToOne(targetEntity: Teacher::class, inversedBy: 'courses')]
-    private $teacher;
-
     #[ORM\OneToMany(mappedBy: 'lessons', targetEntity: Section::class)]
     private $sections;
 
@@ -74,18 +71,6 @@ class Course
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getTeacher(): ?Teacher
-    {
-        return $this->teacher;
-    }
-
-    public function setTeacher(?Teacher $teacher): self
-    {
-        $this->teacher = $teacher;
 
         return $this;
     }

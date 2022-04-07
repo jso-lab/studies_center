@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Teacher;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -23,11 +24,10 @@ class TeacherCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
+            IdField::new('id')->hideOnForm(),
             TextField::new('firstName', 'Nom'),
             TextField::new('lastName', 'Prénom'),
-            TextField::new('email', 'Adresse mail'),
-            TextField::new('password', 'Mot de passe'),
+            EmailField::new('username', 'Adresse mail'),
             TextField::new('presentation', 'Spécialités'),
             ImageField::new('profilPicture', 'Photo de profil')
                 ->setBasePath(self::TEACHERS_BASE_PATH)

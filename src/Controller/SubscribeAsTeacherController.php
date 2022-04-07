@@ -33,12 +33,13 @@ class SubscribeAsTeacherController extends AbstractController
                 ); 
             $em->persist($teacher);
             $em->flush();
+
+            return $this->redirectToRoute('app_form_validated');
         }
-    
         return $this->renderForm('subscribe_as_teacher/index.html.twig', [
             'form' => $form,
-
         ]);
+     
     }
     #[Route('/login', name: 'app_login')]
     public function login() 
