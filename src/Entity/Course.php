@@ -29,6 +29,9 @@ class Course
     #[ORM\OneToMany(mappedBy: 'lessons', targetEntity: Section::class)]
     private $sections;
 
+    #[ORM\ManyToOne(targetEntity: Teacher::class, inversedBy: 'Courses')]
+    private $teacher;
+
     public function __construct()
     {
         $this->sections = new ArrayCollection();
@@ -101,6 +104,18 @@ class Course
                 $section->setLessons(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTeacher(): ?Teacher
+    {
+        return $this->teacher;
+    }
+
+    public function setTeacher(?Teacher $teacher): self
+    {
+        $this->teacher = $teacher;
 
         return $this;
     }

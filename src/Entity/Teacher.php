@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TeacherRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -11,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 
 
-class Teacher  extends User implements  UserInterface, PasswordAuthenticatedUserInterface
+class Teacher extends User implements  UserInterface, PasswordAuthenticatedUserInterface
 
 {
     #[ORM\Id]
@@ -30,6 +32,14 @@ class Teacher  extends User implements  UserInterface, PasswordAuthenticatedUser
 
     #[ORM\Column(type: 'text', length: 255)]
     private $presentation;
+
+    #[ORM\OneToMany(mappedBy: 'teacher', targetEntity: Course::class)]
+    private $Courses;
+
+    public function __construct()
+    {
+        $this->Courses = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -82,7 +92,10 @@ class Teacher  extends User implements  UserInterface, PasswordAuthenticatedUser
 
     public function getRoles(): array
     {
-        return array('ROLE_USER'); 
+       
+        $roles = $this->roles;
+       
+        return array_unique($roles);
     }
 
     public function setRoles(array $roles): self
@@ -106,6 +119,36 @@ class Teacher  extends User implements  UserInterface, PasswordAuthenticatedUser
     public function __toString()
     {
         return $this->firstName;
+    }
+
+    /**
+     * @return Collection<int, Course>
+     */
+    public function getCourses(): Collection
+    {
+        return $this->Courses;
+    }
+
+    public function addCourse(Course $course): self
+    {
+        if (!$this->Courses->contains($course)) {
+            $this->Courses[] = $course;
+            $course->setTeacher($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCourse(Course $course): self
+    {
+        if ($this->Courses->removeElement($course)) {
+            // set the owning side to null (unless already changed)
+            if ($course->getTeacher() === $this) {
+                $course->setTeacher(null);
+            }
+        }
+
+        return $this;
     }
 
 

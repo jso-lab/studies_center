@@ -27,11 +27,11 @@
                 </tr>
             </thead>
             <tbody>
-            {% for teacher in teachers %}
+            {% for user in users %}
                 <tr>
                     <td>{{ teacher.id }}</td>
-                    <td>{{ teacher.firstName}}</td>
-                     <td>{{ teacher.lastName}}</td>
+                    
+                  
                     <td>{{ teacher.email }}</td>
                     <td>
                         {% for role in teacher.roles %}
@@ -39,7 +39,7 @@
                         {% endfor %}
                     </td>
                     <td></td>
-                    <td>{{ teacher.profilPicture}}</td>
+                    <td>{{ teacher.profil_picture}}</td>
                     <td></td>
                 </tr>
             {% else %}

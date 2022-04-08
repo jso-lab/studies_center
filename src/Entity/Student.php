@@ -49,9 +49,9 @@ class Student extends User implements UserInterface, PasswordAuthenticatedUserIn
 
     public function getRoles(): array
     {
-        
-        return array('ROLE_USER');
-
+        $roles = $this->roles;
+       
+        return array_unique($roles);
     }
 
     public function setRoles(array $roles): self

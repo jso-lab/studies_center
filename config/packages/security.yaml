@@ -31,7 +31,9 @@ security:
 
   access_control:
     - { path: ^/admin, roles: ROLE_ADMIN }
+    - { path: ^/teacher, roles: ROLE_ADMIN }
     - { path: ^/course, roles: ROLE_TEACHER }
+    - { path: ^/lesson, roles: ROLE_TEACHER }
     - { path: ^/courses, roles: ROLE_USER }
 
   role_hierarchy:

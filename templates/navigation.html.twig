@@ -26,11 +26,16 @@
 					</ul>
 					{% if not app.user %}
 					<div class="px-3">	
-						<a href="{{ path('app_login')}}"><button type="button" class="btn btn-outline-secondary"><h6>Connexion</h6></button></a>
+						<a href="{{ path('app_login')}}"><button type="button" class="btn btn-outline-secondary">Connexion</button></a>
 					</div>
 					{% else %}
 					<div class="px-3">	
-						<a href="{{ path('app_logout')}}"><button type="button" class="btn btn-outline-primary"><h6>Déconnexion</h6></button></a>
+						<a href="{{ path('app_logout')}}"><button type="button" class="btn btn-outline-primary">Déconnexion</button></a>
+					</div>
+					{% endif %}
+					{% if is_granted('ROLE_ADMIN') %}
+					<div class="px-3">	
+						<a href="{{ path('app_admin_index')}}"><button type="button" class="btn btn-outline-primary">Admin</button></a>
 					</div>
 					{% endif %}
 				</div>

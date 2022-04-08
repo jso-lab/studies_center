@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\UserRepository;
 use App\Entity\User;
 use App\Form\EditUserType;
+use App\Repository\TeacherRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,6 +33,13 @@ class AdminController extends AbstractController
             'users' => $user->findAll()
         ]);
     }
+    // Accès au EasyAdmin des Teachers
+    #[Route('/teachers', name: 'teachers')]
+    public function teacherList() : Response
+    {
+        return $this->redirectToRoute('teacher');
+    }
+
     //Modify a user
     #[Route('/users/modify/{id}', name: 'modify_user')]
     public function modifyUser(User $user,EntityManagerInterface $em, Request $request)
