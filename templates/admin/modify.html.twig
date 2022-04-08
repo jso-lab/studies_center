@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification d'un utilisateur{% endblock %}
+
+{% block body %}
+
+{% include 'navigation.html.twig'%}
+
+{% form_theme userForm 'bootstrap_5_horizontal_layout.html.twig'%}
+
+<main class=" container py-5">
+    <h1 class="pb-4">Modifier un  utilisateur</h1>
+
+    {{ form(userForm) }}
+    
+ </main>   
+
+
+{% include 'footer.html.twig'%}
+
+{% endblock %}

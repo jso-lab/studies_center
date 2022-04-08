@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des utilisateurs{% endblock %}
+
+{% block body %}
+
+{% include 'navigation.html.twig'%}
+
+<main class=" container py-5">
+    <h1>Gestion des  utilisateurs</h1>
+<h2>Formateurs</h2>
+
+    <section class="col-12 my-4">
+    <table class="table table-light table-hover">
+        <caption>Liste des Formateurs</caption>
+            <thead>
+                <tr>
+                    
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>E-mail</th>
+                    <th>Roles</th>
+                    <th>Formations</th>
+                    <th>Avatar</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for teacher in teachers %}
+                <tr>
+                    <td>{{ teacher.id }}</td>
+                    <td>{{ teacher.firstName}}</td>
+                     <td>{{ teacher.lastName}}</td>
+                    <td>{{ teacher.email }}</td>
+                    <td>
+                        {% for role in teacher.roles %}
+                        {{ role }}
+                        {% endfor %}
+                    </td>
+                    <td></td>
+                    <td>{{ teacher.profilPicture}}</td>
+                    <td></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">Aucun utilisateur inscrit</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+    </table>
+    <a href="#"><button class="btn btn-warning">Modifier</button></a>
+    </section>
+ </main>   
+
+
+{% include 'footer.html.twig'%}
+
+{% endblock %}
