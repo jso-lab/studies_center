@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Student;
+use App\Entity\User;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -64,7 +64,7 @@ class BecomeStudentType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Student::class,
+            'data_class' => User::class,
         ]);
     }
 }

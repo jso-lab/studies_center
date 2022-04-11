@@ -6,10 +6,14 @@ use App\Entity\Course;
 use App\Form\CourseType;
 use App\Repository\CoursesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+
+#[IsGranted('ROLE_TEACHER')]
 #[Route('/course')]
 class CourseController extends AbstractController
 {

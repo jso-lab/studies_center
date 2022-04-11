@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class CourseType extends AbstractType
 {
@@ -19,8 +20,22 @@ class CourseType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => 'Titre'
             ])
-            ->add('illustration', FileType::class)
-            ->add('description', TextareaType::class)
+            ->add('illustration', FileType::class, [
+                'label' => 'Visuel',
+                'mapped' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png'
+                        ]
+                    ])
+                ]
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => 'Extrait du cours'
+            ])
             ->add('sections')
        
         ;

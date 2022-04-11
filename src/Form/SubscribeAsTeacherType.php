@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Length;
 
 
@@ -47,8 +48,18 @@ class SubscribeAsTeacherType extends AbstractType
             
             ])
     
-            ->add('profilPicture', FileType::class,[ 
-             'label' => 'Définissez un avatar'  
+            ->add('profilPicture', FileType::class,[
+                'label' => 'Photo',
+                'mapped' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png'
+                        ]
+                    ])
+                ]
             ])
             ->add('presentation', TextareaType::class,[
                 'label' => 'Vos spécialités'  
