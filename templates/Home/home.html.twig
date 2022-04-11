@@ -33,53 +33,26 @@
   
     <hr class="featurette-divider">
 
+{# Affichage des trois dernières formations #}
+  {% for course in courses %}
     <div class="row featurette">
       <div class="col-md-7">
-        <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
-        <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
+        <h2 class="featurette-heading">{{ course.title }}</h2>
+        <p class="lead">{{ course.description }}</p>
         <p>
           <a href="{{ path('app_login')}}" class="btn btn-primary mt-5">Suivre la formations</a>
         </p>
       </div>
       <div class="col-md-5">
-        <img class="img-responsive" src="{{ asset('images/computer-plant.jpeg')}}" width="500" height="300" alt="" />
+        <img class="img-responsive" src="{{ course.illustration }}" width="500" height="300" alt="" />
       </div>
     </div>
 
-    <hr class="featurette-divider">
+     <hr class="featurette-divider"> 
 
-    <div class="row featurette">
-      <div class="col-md-6 order-md-2">
-        <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
-        <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
-        <p>
-          <a href="{{ path('app_login')}}" class="btn btn-success mt-5">Suivre la formations</a>
-        </p>
-      </div>
-      <div class="col-md-6 order-md-1">
-        <img class="img-responsive" src="{{ asset('images/next-life.jpeg')}}" width="500" height="300" alt="" />
-      </div>
-    </div>
-
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-      <div class="col-md-7">
-        <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-        <p class="lead">And yes, this is the last block of representative placeholder content. Again, not really intended to be actually read, simply here to give you a better view of what this would look like with some actual content. Your content.</p>
-        <p>
-          <a href="{{ path('app_login')}}" class="btn btn-primary mt-5">Suivre la formations</a>
-        </p>
-      </div>
-    
-      <div class="col-md-5">
-        <img class="img-responsive" src="{{ asset('images/solar-panel.jpeg')}}" width="500" height="300" alt="" />
-      </div>
-    </div>
-
-    <hr class="featurette-divider">
-
+{% endfor %}
   </div>
+
    <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">

@@ -20,7 +20,7 @@ class Course
     #[ORM\Column(type: 'string', length: 255)]
     private $title;
 
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: 'blob')]
     private $illustration;
 
     #[ORM\Column(type: 'text')]

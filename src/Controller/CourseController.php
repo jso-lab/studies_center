@@ -8,7 +8,7 @@ use App\Repository\CoursesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,7 +33,9 @@ class CourseController extends AbstractController
         $form = $this->createForm(CourseType::class, $course);
         $form->handleRequest($request);
 
+        //On récupère le fichier téléversé
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $illustration */
             $illustration = $form->get('illustration')->getData();
 
             if ($illustration) {
@@ -48,7 +50,7 @@ class CourseController extends AbstractController
                         $newFilename
                     );
                 } catch (FileException $e) {
-                   $e = 'Un problème est survenu...';
+                   throw $e;
                 }
 
                
