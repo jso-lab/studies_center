@@ -14,13 +14,13 @@ class Lesson
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'blob')]
+    #[ORM\Column(type: 'string')]
     private $video;
 
     #[ORM\Column(type: 'text')]
     private $description;
 
-    #[ORM\Column(type: 'blob', nullable: true)]
+    #[ORM\Column(type: 'string', nullable: true)]
     private $files;
 
     #[ORM\ManyToOne(targetEntity: Section::class, inversedBy: 'title')]

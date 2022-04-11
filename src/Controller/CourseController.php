@@ -7,11 +7,12 @@ use App\Form\CourseType;
 use App\Repository\CoursesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
-
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[IsGranted('ROLE_TEACHER')]
 #[Route('/course')]
@@ -26,19 +27,41 @@ class CourseController extends AbstractController
     }
 
     #[Route('/new', name: 'app_course_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, CoursesRepository $coursesRepository): Response
+    public function new(Request $request, CoursesRepository $coursesRepository, SluggerInterface $slugger): Response
     {
         $course = new Course();
         $form = $this->createForm(CourseType::class, $course);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $illustration = $form->get('illustration')->getData();
+
+            if ($illustration) {
+                $originalFilename = pathinfo($illustration->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$illustration->guessExtension();
+
+   
+                try {
+                    $illustration->move(
+                        $this->getParameter('repertoire_illustrations'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                   $e = 'Un problème est survenu...';
+                }
+
+               
+                $course->setIllustration($newFilename)
+                ;
+            }
+
             $coursesRepository->add($course);
             return $this->redirectToRoute('app_course_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('course/new.html.twig', [
-            'une formation' => $course,
+            'Aperçu de la formation' => $course,
             'form' => $form,
         ]);
     }
@@ -52,10 +75,32 @@ class CourseController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_course_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Course $course, CoursesRepository $coursesRepository): Response
+    public function edit(Request $request, Course $course, CoursesRepository $coursesRepository, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(CourseType::class, $course);
         $form->handleRequest($request);
+
+        $illustration = $form->get('illustration')->getData();
+
+        if ($illustration) {
+            $originalFilename = pathinfo($illustration->getClientOriginalName(), PATHINFO_FILENAME);
+            $safeFilename = $slugger->slug($originalFilename);
+            $newFilename = $safeFilename.'-'.uniqid().'.'.$illustration->guessExtension();
+
+
+            try {
+                $illustration->move(
+                    $this->getParameter('repertoire_illustrations'),
+                    $newFilename
+                );
+            } catch (FileException $e) {
+               $e = 'Un problème est survenu...';
+            }
+
+           
+            $course->setIllustration($newFilename)
+            ;
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $coursesRepository->add($course);

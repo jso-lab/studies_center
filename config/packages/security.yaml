@@ -35,7 +35,7 @@ security:
     - { path: ^/teacher, roles: ROLE_ADMIN }
 
   role_hierarchy:
-    ROLE_ADMIN: ROLE_EDITOR
+    ROLE_ADMIN: ROLE_TEACHER
     ROLE_TEACHER: ROLE_USER
     ROLE_USER: ROLE_USER
 

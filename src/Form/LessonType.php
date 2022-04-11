@@ -38,8 +38,8 @@ class LessonType extends AbstractType
                     new File([
                         'maxSize' => '500k',
                         'mimeTypes' => [
-                            'file/pdf',
-                            'file/doc'
+                            'application/pdf',
+                            'application/doc'
                         ]
                     ])
                 ]

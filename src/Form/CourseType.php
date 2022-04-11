@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 
+
 class CourseType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -22,7 +23,6 @@ class CourseType extends AbstractType
             ])
             ->add('illustration', FileType::class, [
                 'label' => 'Visuel',
-                'mapped' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
@@ -44,7 +44,8 @@ class CourseType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Course::class,
+            'data_class' => Course::class
+            
         ]);
     }
 }

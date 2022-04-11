@@ -47,5 +47,7 @@ class BecomeStudentController extends AbstractController
     }
 
     #[Route('/logout', name: 'app_logout')]
-    public function logout() {}
+    public function logout() {
+        // la fonction est définie dans le security.yaml
+    }
 }

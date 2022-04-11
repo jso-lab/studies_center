@@ -27,7 +27,7 @@ class Teacher extends User implements  UserInterface, PasswordAuthenticatedUserI
     #[ORM\Column(type: 'string', length: 255)]
     private $lastName;
 
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: 'blob')]
     private $profilPicture;
 
     #[ORM\Column(type: 'text', length: 255)]
