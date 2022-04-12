@@ -20,9 +20,6 @@ class Course
     #[ORM\Column(type: 'string', length: 255)]
     private $title;
 
-    #[ORM\Column(type: 'blob')]
-    private $illustration;
-
     #[ORM\Column(type: 'text')]
     private $description;
 
@@ -32,9 +29,16 @@ class Course
     #[ORM\ManyToOne(targetEntity: Teacher::class, inversedBy: 'Courses')]
     private $teacher;
 
+    #[ORM\OneToMany(mappedBy: 'course', targetEntity: Illustrations::class)]
+    private $illustrations;
+
+
+
     public function __construct()
     {
         $this->sections = new ArrayCollection();
+        $this->illustrations = new ArrayCollection();
+       
     }
 
     public function getId(): ?int
@@ -50,18 +54,6 @@ class Course
     public function setTitle(string $title): self
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    public function getIllustration()
-    {
-        return $this->illustration;
-    }
-
-    public function setIllustration($illustration): self
-    {
-        $this->illustration = $illustration;
 
         return $this;
     }
@@ -119,4 +111,36 @@ class Course
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Illustrations>
+     */
+    public function getIllustrations(): Collection
+    {
+        return $this->illustrations;
+    }
+
+    public function addIllustration(Illustrations $illustration): self
+    {
+        if (!$this->illustrations->contains($illustration)) {
+            $this->illustrations[] = $illustration;
+            $illustration->setCourse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIllustration(Illustrations $illustration): self
+    {
+        if ($this->illustrations->removeElement($illustration)) {
+            // set the owning side to null (unless already changed)
+            if ($illustration->getCourse() === $this) {
+                $illustration->setCourse(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }

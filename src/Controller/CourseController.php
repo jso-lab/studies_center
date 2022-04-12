@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Course;
+use App\Entity\Illustrations;
 use App\Form\CourseType;
 use App\Repository\CoursesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -44,18 +45,13 @@ class CourseController extends AbstractController
                 $newFilename = $safeFilename.'-'.uniqid().'.'.$illustration->guessExtension();
 
    
-                try {
                     $illustration->move(
                         $this->getParameter('repertoire_illustrations'),
                         $newFilename
                     );
-                } catch (FileException $e) {
-                   throw $e;
-                }
-
-               
-                $course->setIllustration($newFilename)
-                ;
+                    $img = new Illustrations();
+                    $img->setName($newFilename);
+                    $course->addIllustration($img);
             }
 
             $coursesRepository->add($course);
@@ -82,29 +78,26 @@ class CourseController extends AbstractController
         $form = $this->createForm(CourseType::class, $course);
         $form->handleRequest($request);
 
-        $illustration = $form->get('illustration')->getData();
-
-        if ($illustration) {
-            $originalFilename = pathinfo($illustration->getClientOriginalName(), PATHINFO_FILENAME);
-            $safeFilename = $slugger->slug($originalFilename);
-            $newFilename = $safeFilename.'-'.uniqid().'.'.$illustration->guessExtension();
-
-
-            try {
-                $illustration->move(
-                    $this->getParameter('repertoire_illustrations'),
-                    $newFilename
-                );
-            } catch (FileException $e) {
-               $e = 'Un problème est survenu...';
-            }
-
-           
-            $course->setIllustration($newFilename)
-            ;
-        }
-
         if ($form->isSubmitted() && $form->isValid()) {
+
+             /** @var UploadedFile $illustration */
+             $illustration = $form->get('illustration')->getData();
+
+             if ($illustration) {
+                 $originalFilename = pathinfo($illustration->getClientOriginalName(), PATHINFO_FILENAME);
+                 $safeFilename = $slugger->slug($originalFilename);
+                 $newFilename = $safeFilename.'-'.uniqid().'.'.$illustration->guessExtension();
+ 
+    
+                
+                     $illustration->move(
+                         $this->getParameter('repertoire_illustrations'),
+                         $newFilename
+                     );
+                     $img = new Illustrations();
+                     $img->setName($newFilename);
+                     $course->addIllustration($img);
+             }
             $coursesRepository->add($course);
             return $this->redirectToRoute('app_course_index', [], Response::HTTP_SEE_OTHER);
         }

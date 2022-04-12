@@ -14,8 +14,6 @@ class Lesson
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string')]
-    private $video;
 
     #[ORM\Column(type: 'text')]
     private $description;
@@ -25,6 +23,9 @@ class Lesson
 
     #[ORM\ManyToOne(targetEntity: Section::class, inversedBy: 'title')]
     private $section;
+
+    #[ORM\ManyToOne(targetEntity: Videos::class, inversedBy: 'lesson')]
+    private $videos;
 
     public function __construct()
     {
@@ -36,17 +37,6 @@ class Lesson
         return $this->id;
     }
 
-    public function getVideo()
-    {
-        return $this->video;
-    }
-
-    public function setVideo($video): self
-    {
-        $this->video = $video;
-
-        return $this;
-    }
 
     public function getDescription(): ?string
     {
@@ -80,6 +70,18 @@ class Lesson
     public function setSection(?Section $section): self
     {
         $this->section = $section;
+
+        return $this;
+    }
+
+    public function getVideos(): ?Videos
+    {
+        return $this->videos;
+    }
+
+    public function setVideos(?Videos $videos): self
+    {
+        $this->videos = $videos;
 
         return $this;
     }
