@@ -19,14 +19,14 @@ class Lesson
     #[ORM\Column(type: 'text')]
     private $description;
 
-    #[ORM\Column(type: 'string', nullable: true)]
-    private $files;
-
-    #[ORM\ManyToOne(targetEntity: Section::class, inversedBy: 'title')]
-    private $section;
-
     #[ORM\OneToOne(mappedBy: 'lesson', targetEntity: Video::class, cascade: ['persist', 'remove'])]
     private $video;
+
+    #[ORM\OneToOne(mappedBy: 'lesson', targetEntity: Category::class, cascade: ['persist', 'remove'])]
+    private $category;
+
+    #[ORM\ManyToOne(targetEntity: Course::class, inversedBy: 'section')]
+    private $course;
 
 
     public function __construct()
@@ -52,30 +52,6 @@ class Lesson
         return $this;
     }
 
-    public function getFiles()
-    {
-        return $this->files;
-    }
-
-    public function setFiles($files): self
-    {
-        $this->files = $files;
-
-        return $this;
-    }
-
-    public function getSection(): ?Section
-    {
-        return $this->section;
-    }
-
-    public function setSection(?Section $section): self
-    {
-        $this->section = $section;
-
-        return $this;
-    }
-
     public function getVideo(): ?Video
     {
         return $this->video;
@@ -94,6 +70,40 @@ class Lesson
         }
 
         $this->video = $video;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($category === null && $this->category !== null) {
+            $this->category->setLesson(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($category !== null && $category->getLesson() !== $this) {
+            $category->setLesson($this);
+        }
+
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getCourse(): ?Course
+    {
+        return $this->course;
+    }
+
+    public function setCourse(?Course $course): self
+    {
+        $this->course = $course;
 
         return $this;
     }

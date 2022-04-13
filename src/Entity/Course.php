@@ -23,19 +23,24 @@ class Course
     #[ORM\Column(type: 'text')]
     private $description;
 
-    #[ORM\OneToMany(mappedBy: 'lessons', targetEntity: Section::class)]
-    private $sections;
-
     #[ORM\ManyToOne(targetEntity: Teacher::class, inversedBy: 'Courses')]
     private $teacher;
 
     #[ORM\OneToMany(mappedBy: 'course', targetEntity: Illustration::class,  orphanRemoval: true, cascade: ['persist'] )]
     private $illustrations;
 
+    #[ORM\OneToMany(mappedBy: 'course', targetEntity: Lesson::class)]
+    private $section;
+
+    #[ORM\OneToMany(mappedBy: 'course', targetEntity: Category::class)]
+    private $category;
+
     public function __construct()
     {
-        $this->sections = new ArrayCollection();
+       
         $this->illustrations = new ArrayCollection();
+        $this->section = new ArrayCollection();
+        $this->category = new ArrayCollection();
        
        
     }
@@ -65,36 +70,6 @@ class Course
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Section>
-     */
-    public function getSections(): Collection
-    {
-        return $this->sections;
-    }
-
-    public function addSection(Section $section): self
-    {
-        if (!$this->sections->contains($section)) {
-            $this->sections[] = $section;
-            $section->setLessons($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSection(Section $section): self
-    {
-        if ($this->sections->removeElement($section)) {
-            // set the owning side to null (unless already changed)
-            if ($section->getLessons() === $this) {
-                $section->setLessons(null);
-            }
-        }
 
         return $this;
     }
@@ -135,6 +110,66 @@ class Course
             // set the owning side to null (unless already changed)
             if ($illustration->getCourse() === $this) {
                 $illustration->setCourse(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Lesson>
+     */
+    public function getSection(): Collection
+    {
+        return $this->section;
+    }
+
+    public function addSection(Lesson $section): self
+    {
+        if (!$this->section->contains($section)) {
+            $this->section[] = $section;
+            $section->setCourse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSection(Lesson $section): self
+    {
+        if ($this->section->removeElement($section)) {
+            // set the owning side to null (unless already changed)
+            if ($section->getCourse() === $this) {
+                $section->setCourse(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Category>
+     */
+    public function getCategory(): Collection
+    {
+        return $this->category;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->category->contains($category)) {
+            $this->category[] = $category;
+            $category->setCourse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        if ($this->category->removeElement($category)) {
+            // set the owning side to null (unless already changed)
+            if ($category->getCourse() === $this) {
+                $category->setCourse(null);
             }
         }
 
