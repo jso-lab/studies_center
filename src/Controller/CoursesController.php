@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\CoursesRepository;
+use App\Repository\IllustrationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,11 +15,12 @@ class CoursesController extends AbstractController
 {
     #[Route('/courses', name: 'app_courses',  methods: ['GET'])]
    
-    public function index(CoursesRepository $coursesRepository, $limit = 3): Response
+    public function index(CoursesRepository $coursesRepository, IllustrationRepository $illustrationsRepository, $limit = 3): Response
     {
         return $this->render('courses/index.html.twig', [
             'controller_name' => 'CoursesController',
             'courses' => $coursesRepository->findAll(),
+            'illustrations' => $illustrationsRepository->findAll()
         ]);
     }
 }

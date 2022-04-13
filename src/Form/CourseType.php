@@ -23,6 +23,7 @@ class CourseType extends AbstractType
             ])
             ->add('illustration', FileType::class, [
                 'label' => 'Visuel',
+                'mapped' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',

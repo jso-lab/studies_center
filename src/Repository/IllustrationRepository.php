@@ -2,30 +2,30 @@
 
 namespace App\Repository;
 
-use App\Entity\Illustrations;
+use App\Entity\Illustration;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Illustrations|null find($id, $lockMode = null, $lockVersion = null)
- * @method Illustrations|null findOneBy(array $criteria, array $orderBy = null)
- * @method Illustrations[]    findAll()
- * @method Illustrations[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Illustration|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Illustration|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Illustration[]    findAll()
+ * @method Illustration[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class IllustrationsRepository extends ServiceEntityRepository
+class IllustrationRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Illustrations::class);
+        parent::__construct($registry, Illustration::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Illustrations $entity, bool $flush = true): void
+    public function add(Illustration $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -37,7 +37,7 @@ class IllustrationsRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Illustrations $entity, bool $flush = true): void
+    public function remove(Illustration $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -46,7 +46,7 @@ class IllustrationsRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Illustrations[] Returns an array of Illustrations objects
+    //  * @return Illustration[] Returns an array of Illustration objects
     //  */
     /*
     public function findByExampleField($value)
@@ -63,7 +63,7 @@ class IllustrationsRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Illustrations
+    public function findOneBySomeField($value): ?Illustration
     {
         return $this->createQueryBuilder('i')
             ->andWhere('i.exampleField = :val')

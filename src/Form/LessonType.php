@@ -15,7 +15,7 @@ class LessonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('video', FileType::class, [
+            ->add('videos', FileType::class, [
                 'label' => 'Vidéo',
                 'mapped' => false,
                 'constraints' => [

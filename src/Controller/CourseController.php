@@ -3,17 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Course;
-use App\Entity\Illustrations;
+use App\Entity\Illustration;
 use App\Form\CourseType;
 use App\Repository\CoursesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\String\Slugger\SluggerInterface;
+
 
 #[IsGranted('ROLE_TEACHER')]
 #[Route('/course')]
@@ -28,7 +26,7 @@ class CourseController extends AbstractController
     }
 
     #[Route('/new', name: 'app_course_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, CoursesRepository $coursesRepository, SluggerInterface $slugger): Response
+    public function new(Request $request, CoursesRepository $coursesRepository) : Response
     {
         $course = new Course();
         $form = $this->createForm(CourseType::class, $course);
@@ -36,25 +34,26 @@ class CourseController extends AbstractController
 
         //On récupère le fichier téléversé
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var UploadedFile $illustration */
-            $illustration = $form->get('illustration')->getData();
+           
+            $img = $form->get('illustration')->getData();
 
-            if ($illustration) {
-                $originalFilename = pathinfo($illustration->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$illustration->guessExtension();
+            if ($img) {
+               
+               
+                $fichier = md5(uniqid()).'.'.$img->guessExtension();
 
    
-                    $illustration->move(
+                    $img->move(
                         $this->getParameter('repertoire_illustrations'),
-                        $newFilename
+                        $fichier
                     );
-                    $img = new Illustrations();
-                    $img->setName($newFilename);
-                    $course->addIllustration($img);
+                    $illustration = new Illustration();
+                    $illustration->setName($fichier);
+                    $course->addIllustration($illustration);
             }
 
             $coursesRepository->add($course);
+   
             return $this->redirectToRoute('app_course_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -68,36 +67,34 @@ class CourseController extends AbstractController
     public function show(Course $course): Response
     {
         return $this->render('course/show.html.twig', [
-            'course' => $course,
+            'course' => $course
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_course_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Course $course, CoursesRepository $coursesRepository, SluggerInterface $slugger): Response
+    public function edit(Request $request, Course $course, CoursesRepository $coursesRepository): Response
     {
         $form = $this->createForm(CourseType::class, $course);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+           
+            $img = $form->get('illustration')->getData();
 
-             /** @var UploadedFile $illustration */
-             $illustration = $form->get('illustration')->getData();
+            if ($img) {
+               
+               
+                $fichier = md5(uniqid()).'.'.$img->guessExtension();
 
-             if ($illustration) {
-                 $originalFilename = pathinfo($illustration->getClientOriginalName(), PATHINFO_FILENAME);
-                 $safeFilename = $slugger->slug($originalFilename);
-                 $newFilename = $safeFilename.'-'.uniqid().'.'.$illustration->guessExtension();
- 
-    
-                
-                     $illustration->move(
-                         $this->getParameter('repertoire_illustrations'),
-                         $newFilename
-                     );
-                     $img = new Illustrations();
-                     $img->setName($newFilename);
-                     $course->addIllustration($img);
-             }
+   
+                    $img->move(
+                        $this->getParameter('repertoire_illustrations'),
+                        $fichier
+                    );
+                    $illustration = new Illustration();
+                    $illustration->setName($fichier);
+                    $course->addIllustration($illustration);
+            }
             $coursesRepository->add($course);
             return $this->redirectToRoute('app_course_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -106,6 +103,7 @@ class CourseController extends AbstractController
             'course' => $course,
             'form' => $form,
         ]);
+     
     }
 
     #[Route('/{id}', name: 'app_course_delete', methods: ['POST'])]

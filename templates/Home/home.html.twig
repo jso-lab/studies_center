@@ -44,7 +44,9 @@
         </p>
       </div>
       <div class="col-md-5">
-        <img class="img-responsive" src="{{ course.illustration }}" width="500" height="300" alt="" />
+         {% for illustration in illustrations %}
+            <img class="img img-responsive" src="{{ asset('/images/courses/' ~ illustration.name) }}" alt="image"/>
+          {% endfor %}
       </div>
     </div>
 

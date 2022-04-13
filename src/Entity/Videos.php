@@ -18,7 +18,7 @@ class Videos
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $name;
 
-    #[ORM\OneToMany(mappedBy: 'videos', targetEntity: Lesson::class)]
+    #[ORM\OneToMany(mappedBy: 'videos', targetEntity: Lesson::class, cascade: ['persist'])]
     private $lesson;
 
     public function __construct()

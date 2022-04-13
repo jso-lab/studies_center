@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Lesson;
+use App\Entity\Videos;
 use App\Form\LessonType;
 use App\Repository\LessonRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,7 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[IsGranted('ROLE_TEACHER')]
 #[Route('/lesson')]
@@ -25,13 +26,31 @@ class LessonController extends AbstractController
     }
 
     #[Route('/new', name: 'app_lesson_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, LessonRepository $lessonRepository): Response
+    public function new(Request $request, LessonRepository $lessonRepository, SluggerInterface $slugger): Response
     {
         $lesson = new Lesson();
         $form = $this->createForm(LessonType::class, $lesson);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+
+            $video = $form->get('videos')->getData();
+
+            if ($video) {
+                $originalFilename = pathinfo($video->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$video->guessExtension();
+
+   
+                    $video->move(
+                        $this->getParameter('repertoire_illustrations'),
+                        $newFilename
+                    );
+                    $vid = new Videos();
+                    $vid->setName($newFilename);
+                    $lesson->setVideos($vid);
+            }
             $lessonRepository->add($lesson);
             return $this->redirectToRoute('app_lesson_index', [], Response::HTTP_SEE_OTHER);
         }

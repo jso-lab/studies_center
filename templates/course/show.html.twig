@@ -22,7 +22,13 @@
             </tr>
             <tr>
                 <th>Illustration</th>
-                <td>{{ course.illustration }}</td>
+                    <td>
+                        {% for illustration in course.illustrations %}
+                            <div>
+                                <img class="m-3" src="{{ asset('/images/courses/' ~ illustration.name) }}" alt="images" width="200"/>
+                            </div>
+                        {% endfor %}
+                    </td>
             </tr>
             <tr>
                 <th>Description</th>

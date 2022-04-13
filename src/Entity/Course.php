@@ -29,15 +29,14 @@ class Course
     #[ORM\ManyToOne(targetEntity: Teacher::class, inversedBy: 'Courses')]
     private $teacher;
 
-    #[ORM\OneToMany(mappedBy: 'course', targetEntity: Illustrations::class)]
+    #[ORM\OneToMany(mappedBy: 'course', targetEntity: Illustration::class,  orphanRemoval: true, cascade: ['persist'] )]
     private $illustrations;
-
-
 
     public function __construct()
     {
         $this->sections = new ArrayCollection();
         $this->illustrations = new ArrayCollection();
+       
        
     }
 
@@ -113,14 +112,14 @@ class Course
     }
 
     /**
-     * @return Collection<int, Illustrations>
+     * @return Collection<int, Illustration>
      */
     public function getIllustrations(): Collection
     {
         return $this->illustrations;
     }
 
-    public function addIllustration(Illustrations $illustration): self
+    public function addIllustration(Illustration $illustration): self
     {
         if (!$this->illustrations->contains($illustration)) {
             $this->illustrations[] = $illustration;
@@ -130,7 +129,7 @@ class Course
         return $this;
     }
 
-    public function removeIllustration(Illustrations $illustration): self
+    public function removeIllustration(Illustration $illustration): self
     {
         if ($this->illustrations->removeElement($illustration)) {
             // set the owning side to null (unless already changed)
@@ -142,5 +141,6 @@ class Course
         return $this;
     }
 
+   
 
 }
