@@ -1,5 +1,6 @@
 parameters:
   repertoire_illustrations: '%kernel.project_dir%/public/images/courses'
+  repertoire_videos: '%kernel.project_dir%/public/videos'
 services:
   _defaults:
     autowire: true

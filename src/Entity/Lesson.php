@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\LessonRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LessonRepository::class)]
@@ -24,8 +25,9 @@ class Lesson
     #[ORM\ManyToOne(targetEntity: Section::class, inversedBy: 'title')]
     private $section;
 
-    #[ORM\ManyToOne(targetEntity: Videos::class, inversedBy: 'lesson')]
-    private $videos;
+    #[ORM\OneToOne(mappedBy: 'lesson', targetEntity: Video::class, cascade: ['persist', 'remove'])]
+    private $video;
+
 
     public function __construct()
     {
@@ -74,16 +76,28 @@ class Lesson
         return $this;
     }
 
-    public function getVideos(): ?Videos
+    public function getVideo(): ?Video
     {
-        return $this->videos;
+        return $this->video;
     }
 
-    public function setVideos(?Videos $videos): self
+    public function setVideo(?Video $video): self
     {
-        $this->videos = $videos;
+        // unset the owning side of the relation if necessary
+        if ($video === null && $this->video !== null) {
+            $this->video->setLesson(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($video !== null && $video->getLesson() !== $this) {
+            $video->setLesson($this);
+        }
+
+        $this->video = $video;
 
         return $this;
     }
+
+
 
 }

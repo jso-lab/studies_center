@@ -9,13 +9,14 @@
 <main class=" container py-5">
     <h1>Catalogue des leçons</h1>
 
-    <table class="table">
+    <table class="table table-hover">
+    <caption>Formations disponibles</caption>
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Video</th>
-                <th>Description</th>
-                <th>Files</th>
+                <th>Explication textuelle</th>
+                <th>Ressources</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -23,7 +24,18 @@
         {% for lesson in lessons %}
             <tr>
                 <td>{{ lesson.id }}</td>
-                <td>{{ lesson.videos }}</td>
+                <td>
+                     {% for video in lesson.video %}
+                       
+                            <video controls fullscreen width="500">
+
+                                <source src="{{ asset('/videos/' ~ video.name) }}">
+
+                                Un problème est survenu...
+                            </video>
+                       
+                    {% endfor %}
+                </td>
                 <td>{{ lesson.description }}</td>
                 <td>{{ lesson.files }}</td>
                 <td>

@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Lesson;
-use App\Entity\Videos;
+use App\Entity\Video;
 use App\Form\LessonType;
 use App\Repository\LessonRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,7 +35,7 @@ class LessonController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
 
-            $video = $form->get('videos')->getData();
+            $video = $form->get('video')->getData();
 
             if ($video) {
                 $originalFilename = pathinfo($video->getClientOriginalName(), PATHINFO_FILENAME);
@@ -44,12 +44,12 @@ class LessonController extends AbstractController
 
    
                     $video->move(
-                        $this->getParameter('repertoire_illustrations'),
+                        $this->getParameter('repertoire_videos'),
                         $newFilename
                     );
-                    $vid = new Videos();
+                    $vid = new Video();
                     $vid->setName($newFilename);
-                    $lesson->setVideos($vid);
+                    $lesson->setVideo($vid);
             }
             $lessonRepository->add($lesson);
             return $this->redirectToRoute('app_lesson_index', [], Response::HTTP_SEE_OTHER);

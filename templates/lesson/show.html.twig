@@ -8,9 +8,10 @@
 
 <main class=" container py-5">
 
-    <h1>Leçons</h1>
+    <h1>Leçon</h1>
 
     <table class="table table-hover">
+        <caption>Aperçu de la leçon</caption>
         <tbody>
             <tr>
                 <th>N°</th>
@@ -18,7 +19,18 @@
             </tr>
             <tr>
                 <th>Video</th>
-                <td>{{ lesson.videos }}</td>
+                <td>
+                    {% for video in lesson.video %}
+                        <div>
+                            <video controls fullscreen width="500">
+
+                                <source src="{{ asset('/videos/' ~ video.name) }}" type="video/mp4">
+
+                                Un problème est survenu...
+                            </video>
+                        </div>
+                    {% endfor %}
+                </td>
             </tr>
             <tr>
                 <th>Description</th>

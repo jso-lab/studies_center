@@ -31,7 +31,7 @@
         <div class="col">
           <div class="card shadow-sm">
           
-            {% for illustration in illustrations %}
+            {% for illustration in course.illustrations %}
             <img class="card-img img-responsive" src="{{ asset('/images/courses/' ~ illustration.name) }}" alt="image"/>
             {% endfor %}
             <div class="card-body">

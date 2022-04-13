@@ -15,7 +15,7 @@ class LessonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('videos', FileType::class, [
+            ->add('video', FileType::class, [
                 'label' => 'Vidéo',
                 'mapped' => false,
                 'constraints' => [
@@ -23,7 +23,8 @@ class LessonType extends AbstractType
                         'maxSize' => '10024k',
                         'mimeTypes' => [
                             'video/mpeg',
-                            'video/mp4'
+                            'video/mp4',
+                            'video/webm'
                         ]
                     ])
                 ]
