@@ -2,8 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Course;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -37,7 +39,13 @@ class CourseType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => 'Extrait du cours'
             ])
-            ->add('sections')
+            ->add('section', ChoiceType::class, [
+                'choices' => [
+                   new Category('Développement durable'),
+                   new Category('Ecologie domestique'),
+                   new Category('Nature technique'),
+                ]
+            ])
        
         ;
     }

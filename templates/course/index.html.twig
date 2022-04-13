@@ -34,7 +34,7 @@
                     {% endfor %}
                 </td>
                 <td>{{ course.description }}</td>
-                <td>{{ course.sections ? course.sections|join(', ') : '' }}</td>
+                <td>{{ course.section ? course.section|join(', ') : '' }}</td>
                 <td>
                     <a href="{{ path('app_course_show', {'id': course.id}) }}"><button class="btn btn-info mb-1">Afficher</button></a>
                     <a href="{{ path('app_course_edit', {'id': course.id}) }}"><button class="btn btn-warning">Modifier</button></a>

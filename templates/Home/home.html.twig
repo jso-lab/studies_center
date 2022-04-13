@@ -25,7 +25,7 @@
             <button class="btn btn-outline-success btn-lg m-2"  type="button">Devenir Apprenant</button>
           </a>
       </div>
-   <img class="img-responsive col-md-4"  src="{{ asset('images/logo-big.png')}}"  alt="logo - Eco IT" />
+   <img class="img-responsive d-none d-lg-block col-md-4"  src="{{ asset('images/logo-big.png')}}"  alt="logo - Eco IT" />
     
 </div>
 
@@ -46,7 +46,7 @@
       <div class="col-md-5">
           {% for illustration in course.illustrations %}
               <div>
-                <img  src="{{ asset('/images/courses/' ~ illustration.name) }}" alt="illustration" width="500" height="300"/>
+                <img class="img-responsive" src="{{ asset('/images/courses/' ~ illustration.name) }}" alt="illustration" width="400" height="200"/>
               </div>
           {% endfor %}
       </div>

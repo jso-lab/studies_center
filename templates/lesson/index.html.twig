@@ -37,7 +37,8 @@
                     {% endfor %}
                 </td>
                 <td>{{ lesson.description }}</td>
-                <td>{{ lesson.files }}</td>
+                <td></td>
+                {#  <td>{{ lesson.files }}</td> #}
                 <td>
                     <a href="{{ path('app_lesson_show', {'id': lesson.id}) }}"><button class="btn btn-info mb-1">Afficher</button></a>
                     <a href="{{ path('app_lesson_edit', {'id': lesson.id}) }}"><button class="btn btn-warning">Modifier</button></a>
@@ -48,8 +49,14 @@
             <tr>
                 <td colspan="5">Aucun résultat</td>
             </tr>
-        {% endfor %}
+     
         </tbody>
+        <tfoot>
+            <tr>
+                <th>{{ lesson.category }}</th>
+            </tr>
+        </tfoot>
+           {% endfor %}
     </table>
 
     <a href="{{ path('app_lesson_new') }}"><button class="btn btn-primary">Ajouter une leçon</button></a>
