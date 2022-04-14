@@ -19,7 +19,9 @@ class CoursesController extends AbstractController
     {
         return $this->render('courses/index.html.twig', [
             'controller_name' => 'CoursesController',
+            //On affiche toutes les formations
             'courses' => $coursesRepository->findAll(),
+            //On affiche également les illustrations qui accompagnent
             'illustrations' => $illustrationsRepository->findAll()
         ]);
     }

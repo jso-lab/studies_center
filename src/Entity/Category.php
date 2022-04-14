@@ -19,9 +19,6 @@ class Category
     #[ORM\OneToOne(inversedBy: 'category', targetEntity: Lesson::class, cascade: ['persist', 'remove'])]
     private $lesson;
 
-    #[ORM\ManyToOne(targetEntity: Course::class, inversedBy: 'category')]
-    private $course;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -51,15 +48,5 @@ class Category
         return $this;
     }
 
-    public function getCourse(): ?Course
-    {
-        return $this->course;
-    }
-
-    public function setCourse(?Course $course): self
-    {
-        $this->course = $course;
-
-        return $this;
-    }
+  
 }

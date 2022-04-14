@@ -37,9 +37,11 @@ class AdminController extends AbstractController
     }
     // Accès au EasyAdmin des Teachers
     #[Route('/teachers', name: 'teachers')]
-    public function teacherList() : Response
+    public function teacherList(TeacherRepository $teacher)
     {
-        return $this->redirectToRoute('teacher');
+        return $this->render('admin/teachers.html.twig', [
+            'teachers' => $teacher->findAll()
+        ]);
     }
 
     //Modify a user

@@ -12,11 +12,12 @@ class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
 
-    public function index(CoursesRepository $coursesRepository): Response
+    public function index(CoursesRepository $coursesRepository, $limit = 3): Response
     {
         return $this->render('home/home.html.twig', [
             'controller_name' => 'HomeController',
-            'courses' => $coursesRepository->findAll(),
+            //On affiche que les trois dernères formation
+            'courses' => $coursesRepository->findBy([], ['id' => 'DESC'], $limit),
             
         ]);
      

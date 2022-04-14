@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Category;
+
 use App\Entity\Course;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -39,12 +39,13 @@ class CourseType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => 'Extrait du cours'
             ])
-            ->add('section', ChoiceType::class, [
+            ->add('section', ChoiceType::class ,[
                 'choices' => [
-                   new Category('Développement durable'),
-                   new Category('Ecologie domestique'),
-                   new Category('Nature technique'),
-                ]
+                    'Développement durable' => true,
+                'Ecologie domestique' => true,
+                'Nature technique' => true
+                ],
+                'mapped' => false
             ])
        
         ;

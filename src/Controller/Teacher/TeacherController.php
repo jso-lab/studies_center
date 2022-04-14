@@ -20,7 +20,7 @@ class TeacherController extends AbstractDashboardController
     
     }
 
-    #[Route('/teacher', name: 'teacher')]
+    #[Route('/teacher_space', name: 'teacher_space')]
    
     public function index(): Response
     {

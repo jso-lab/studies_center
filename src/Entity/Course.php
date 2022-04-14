@@ -29,22 +29,13 @@ class Course
     #[ORM\OneToMany(mappedBy: 'course', targetEntity: Illustration::class,  orphanRemoval: true, cascade: ['persist'] )]
     private $illustrations;
 
-    #[ORM\OneToMany(mappedBy: 'course', targetEntity: Lesson::class)]
-    private $section;
-
-    #[ORM\OneToMany(mappedBy: 'course', targetEntity: Category::class)]
-    private $category;
 
     public function __construct()
     {
        
         $this->illustrations = new ArrayCollection();
-        $this->section = new ArrayCollection();
-        $this->category = new ArrayCollection();
-       
        
     }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -115,67 +106,5 @@ class Course
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, Lesson>
-     */
-    public function getSection(): Collection
-    {
-        return $this->section;
-    }
-
-    public function addSection(Lesson $section): self
-    {
-        if (!$this->section->contains($section)) {
-            $this->section[] = $section;
-            $section->setCourse($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSection(Lesson $section): self
-    {
-        if ($this->section->removeElement($section)) {
-            // set the owning side to null (unless already changed)
-            if ($section->getCourse() === $this) {
-                $section->setCourse(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Category>
-     */
-    public function getCategory(): Collection
-    {
-        return $this->category;
-    }
-
-    public function addCategory(Category $category): self
-    {
-        if (!$this->category->contains($category)) {
-            $this->category[] = $category;
-            $category->setCourse($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Category $category): self
-    {
-        if ($this->category->removeElement($category)) {
-            // set the owning side to null (unless already changed)
-            if ($category->getCourse() === $this) {
-                $category->setCourse(null);
-            }
-        }
-
-        return $this;
-    }
-
-   
 
 }

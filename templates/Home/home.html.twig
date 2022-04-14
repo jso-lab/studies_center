@@ -14,12 +14,14 @@
    
     <div class="col-md-8 fs-4">
         <h1 class="display-5 fw-bold pt-5">Des formations pour la planète</h1>
-          <p class="">Using a series of utilities, you can create this jumbotron, 
-            just like the one in previous versions of Bootstrap. Check out the examples below for 
-            how you can remix and restyle it to your liking.</p>
+          <p class="">
+             Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, 
+          sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. 
+          Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.
+          </p>
 
           <a href="{{ path('app_subscribe_as_teacher')}}">
-            <button class="btn btn-primary btn-lg m-2"  type="button">Devenir instructeur</button>
+            <button class="btn btn-primary btn-lg m-2"  type="button">Devenir Formateur</button>
           </a>
 		      <a href="{{ path('app_register')}}">
             <button class="btn btn-outline-success btn-lg m-2"  type="button">Devenir Apprenant</button>
@@ -38,15 +40,19 @@
     <div class="row featurette">
       <div class="col-md-7">
         <h2 class="featurette-heading">{{ course.title }}</h2>
-        <p class="lead">{{ course.description }}</p>
+        <p class="lead pb-4">{{ course.description }}</p>
         <p>
-          <a href="{{ path('app_login')}}" class="btn btn-primary mt-5">Suivre la formations</a>
+          {% if app.user %}
+            <a href="{{ path('app_course_show', {'id': course.id}) }}"><button class="btn btn-info btn-lg m-2">Commencer !</button></a>
+          {% else %}
+            <a href="{{ path('app_register')}}" class="btn btn-primary btn-lg mt-5">S'inscrire maintenant !</a>
+          {% endif %}
         </p>
       </div>
       <div class="col-md-5">
           {% for illustration in course.illustrations %}
               <div>
-                <img class="img-responsive" src="{{ asset('/images/courses/' ~ illustration.name) }}" alt="illustration" width="400" height="200"/>
+                <img class="img-responsive" src="{{ asset('/images/courses/' ~ illustration.name) }}" alt="illustration" width="450" height="300"/>
               </div>
           {% endfor %}
       </div>
@@ -61,12 +67,16 @@
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
         <h1 class="fw-light">Les formations proposées</h1>
-        <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+        <p class="lead text-muted">
+           Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, 
+          sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. 
+          Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.
+        </p>
         <p>
         {% if app.user %}
-          <a href="{{ path('app_courses')}}" class="btn btn-primary my-2">Voir plus de formations</a>
+          <a href="{{ path('app_courses')}}" class="btn btn-secondary btn-lg my-2">Voir plus de formations</a>
         {% else %} 
-          <a href="{{ path('app_register')}}" class="btn btn-primary my-2">S'inscrire pour découvrir les formations</a> 
+          <a href="{{ path('app_register')}}" class="btn btn-info btn-lg my-2">S'inscrire pour découvrir les formations</a> 
         {% endif %}  
         </p>
       </div>
