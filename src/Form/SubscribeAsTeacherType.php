@@ -48,19 +48,19 @@ class SubscribeAsTeacherType extends AbstractType
             
             ])
     
-            ->add('profilPicture', FileType::class,[
+           /* ->add('ProfilPics', FileType::class,[
                 'label' => 'Photo',
                 'mapped' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024k',
+                        'maxSize' => '512k',
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/png'
                         ]
                     ])
                 ]
-            ])
+            ])*/
             ->add('presentation', TextareaType::class,[
                 'label' => 'Vos spécialités'  
             ])

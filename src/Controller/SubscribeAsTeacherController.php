@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Teacher;
 use App\Form\SubscribeAsTeacherType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,6 +26,7 @@ class SubscribeAsTeacherController extends AbstractController
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
+
             $teacher->setPassword(
                 $userPasswordHasher->hashPassword(
                        $teacher,

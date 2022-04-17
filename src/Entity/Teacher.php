@@ -27,9 +27,6 @@ class Teacher extends User implements  UserInterface, PasswordAuthenticatedUserI
     #[ORM\Column(type: 'string', length: 255)]
     private $lastName;
 
-    #[ORM\Column(type: 'blob')]
-    private $profilPicture;
-
     #[ORM\Column(type: 'text', length: 255)]
     private $presentation;
 
@@ -76,18 +73,6 @@ class Teacher extends User implements  UserInterface, PasswordAuthenticatedUserI
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
-    }
-
-    public function getProfilPicture()
-    {
-        return $this->profilPicture;
-    }
-
-    public function setProfilPicture($profilPicture): self
-    {
-        $this->profilPicture = $profilPicture;
-
-        return $this;
     }
 
     public function getRoles(): array
@@ -150,6 +135,5 @@ class Teacher extends User implements  UserInterface, PasswordAuthenticatedUserI
 
         return $this;
     }
-
 
 }
