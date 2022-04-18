@@ -7,41 +7,25 @@
 {% include 'navigation.html.twig'%}
 
 <main class=" container py-5">
-    <h1>Formation</h1>
-
-    <table class="table table-hover">
-        <caption>Aperçu d'une formation</caption>
-        <tbody>
-            <tr>
-                <th>N°</th>
-                <td>{{ course.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ course.title }}</td>
-            </tr>
-            <tr>
-                <th>Illustration</th>
-                    <td>
-                        {% for illustration in course.illustrations %}
+    <h1>{{ course.title }}</h1>
+    <div class="card mb-3">
+       {% for illustration in course.illustrations %}
                             <div>
-                                <img class="m-3" src="{{ asset('/images/courses/' ~ illustration.name) }}" alt="images" width="200"/>
+                                <img class="card-img-top" src="{{ asset('/images/courses/' ~ illustration.name) }}" alt="images"/>
                             </div>
                         {% endfor %}
-                    </td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ course.description }}</td>
-            </tr>
-          
-        </tbody>
-    </table>
+            <div class="card-body">
+                <h5 class="card-title">{{ course.title }}</h5>
+                    <p class="card-text">{{ course.description }}</p>
+                    <p class="card-text"><small class="text-muted">Formation N° {{ course.id }}</small></p>
+            </div>
+    </div>
 
    <a href="{{ path('app_course_index') }}"><button class="btn btn-primary">Retour à l'index</button></a>
-
+{% if is_granted('ROLE_TEACHER') %}
  <a href="{{ path('app_course_edit', {'id': course.id}) }}"><button class="btn btn-warning">Modifier</button></a>
 
 {{ include('course/_delete_form.html.twig') }}
+{% endif %}
 </main>
 {% endblock %}

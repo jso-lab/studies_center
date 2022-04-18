@@ -15,8 +15,7 @@
         <caption>Liste des Formateurs</caption>
             <thead>
                 <tr>
-                    
-                    <th>N°</th>
+               
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>Mail</th>
@@ -30,12 +29,12 @@
             <tbody>
             {% for teacher in teachers %}
                 <tr>
-                    <td>{{ teacher.id }}</td>
-                    <td></td>
-                    <td></td>
+                   
+                    <td>{{ teacher.firstName }}</td>
+                    <td>{{ teacher.lastName }}</</td>
                  
                   
-                    <td>{{ teacher.email }}</td>
+                    <td>{{ teacher.username }}</td>
                     <td></td>
                     <td></td>
                     <td colspan="4"> 

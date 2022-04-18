@@ -1,36 +1,37 @@
-"%kernel.logs_dir%/%kernel.environment%.log"
 
 
-## Affichage des trois formations sur la page d'Accueil
-
-------------------
-
-
-    <div class="row featurette">
-      <div class="col-md-6 order-md-2">
-        <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
-        <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
-        <p>
-          <a href="{{ path('app_login')}}" class="btn btn-success mt-5">Suivre la formations</a>
-        </p>
-      </div>
-      <div class="col-md-6 order-md-1">
-        <img class="img-responsive" src="{{ asset('images/next-life.jpeg')}}" width="500" height="300" alt="" />
-      </div>
-    </div>
-
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-      <div class="col-md-7">
-        <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-        <p class="lead">And yes, this is the last block of representative placeholder content. Again, not really intended to be actually read, simply here to give you a better view of what this would look like with some actual content. Your content.</p>
-        <p>
-          <a href="{{ path('app_login')}}" class="btn btn-primary mt-5">Suivre la formations</a>
-        </p>
-      </div>
-    
-      <div class="col-md-5">
-        <img class="img-responsive" src="{{ asset('images/solar-panel.jpeg')}}" width="500" height="300" alt="" />
-      </div>
-    </div>
+<nav class="navbar  navbar-expand-lg navbar-light bg-light">
+			<div class="container">
+			<a class="navbar-brand"href="{{ path('app_home')}}"><img src="{{ asset('images/logo-text.png')}}" width="90" height="30" alt="logo - Eco IT" /></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+      				<span class="navbar-toggler-icon"></span>
+    			</button>
+				<div class="collapse navbar-collapse" id="navbarToggler">
+					<ul class="navbar-nav  me-auto mb-2 mb-lg-0 ">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="{{ path('app_home')}}">Accueil</a>
+						</li>
+            			<li class="nav-item">
+							<a class="nav-link " href="{{ path('app_courses')}}">Formations</a>
+						</li>
+						<li class="nav-item ">
+							<a class="nav-link " href="{{ path('app_about')}}">A propos</a>		
+						</li>		
+					</ul>
+					{% if not app.user %}
+						<div class="nav-item">	
+							<a class="nav-link" href="{{ path('app_login')}}"><button type="button" class="btn btn-outline-secondary">Connexion</button></a>
+						</div>
+					{% else %}
+						<div class="nav-item">	
+							<a class="nav-link" href="{{ path('app_logout')}}"><button type="button" class="btn btn-outline-primary">Déconnexion</button></a>
+						</div>
+					{% endif %}
+					{% if is_granted('ROLE_ADMIN') %}
+						<div class="nav-item">	
+							<a class="nav-link" href="{{ path('app_admin_index')}}"><button type="button" class="btn btn-outline-primary">Admin</button></a>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+		</nav>
