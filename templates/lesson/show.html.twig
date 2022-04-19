@@ -15,7 +15,9 @@
         <tbody>
        
             <tr>
-              
+                <td>
+                    <input type="range"/> 
+                </td> 
                 <td>
                     {% for video in lesson.video %}
                         <div>
@@ -46,6 +48,10 @@
 
     <div class="py-2">
         {{ include('lesson/_delete_form.html.twig') }}
+    </div>
+
+    <div class="range">
+        <p>Marquer comme termninée</p>
     </div>
 
 </main>
