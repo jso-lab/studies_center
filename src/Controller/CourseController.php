@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Course;
 use App\Entity\Illustration;
 use App\Form\CourseType;
+use App\Repository\LessonRepository;
 use App\Repository\CoursesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -64,10 +65,11 @@ class CourseController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_course_show', methods: ['GET'])]
-    public function show(Course $course): Response
+    public function show(Course $course, LessonRepository $lessonRepository): Response
     {
         return $this->render('course/show.html.twig', [
-            'course' => $course
+            'course' => $course, 
+            'lessons' => $lessonRepository->findAll(),
         ]);
     }
 

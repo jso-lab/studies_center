@@ -15,23 +15,22 @@
 
             <h2 class="accordion-header" id="flush-headingOne">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                     {{ lesson.id }}
+                    {{ lesson.id }} - {{ lesson.title }}
                 </button>
             </h2>
                 <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                     {% for video in lesson.video %}
                        
-                        <video controls fullscreen width="500">
-
-                            <source src="{{ asset('/videos/' ~ video.name) }}">
-
+                        <video id="video" controls preload="metadata">
+                            <caption>{{ lesson.title }}</caption>
+                            <source src="{{ asset('/videos/' ~ video.name) }}" type="video/mp4" alt="video"/>
                             Un problème est survenu...
                         </video>
                        
                     {% endfor %}
                     <div class="accordion-body">
                         {{ lesson.description }}
-                        <p>{{ lesson.category }}</p>
+                     
                     </div>
                 </div>
         </div>

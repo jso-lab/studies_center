@@ -17,6 +17,9 @@ class LessonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('title', TextType::class, [
+                'label' => 'intitulé'
+            ])
             ->add('video', FileType::class, [
                 'label' => 'Vidéo',
                 'mapped' => false,
@@ -39,7 +42,7 @@ class LessonType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '500k',
+                        'maxSize' => '1000k',
                         'mimeTypes' => [
                             'application/pdf',
                             'application/doc'
@@ -47,9 +50,9 @@ class LessonType extends AbstractType
                     ])
                 ]
             ])
-            ->add('category', TextType::class , [
+            ->add('section', TextType::class, [
                 'mapped' => false,
-               
+                'label' => 'Formation'
             ])
         ;
     }

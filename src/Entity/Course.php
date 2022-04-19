@@ -29,11 +29,16 @@ class Course
     #[ORM\OneToMany(mappedBy: 'course', targetEntity: Illustration::class,  orphanRemoval: true, cascade: ['persist'] )]
     private $illustrations;
 
+    #[ORM\OneToMany(mappedBy: 'course', targetEntity: Lesson::class, orphanRemoval: true)]
+    private $section;
+
 
     public function __construct()
     {
        
         $this->illustrations = new ArrayCollection();
+        $this->section = new ArrayCollection();
+    
        
     }
     public function getId(): ?int
@@ -106,5 +111,36 @@ class Course
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Lesson>
+     */
+    public function getSection(): Collection
+    {
+        return $this->section;
+    }
+
+    public function addSection(Lesson $section): self
+    {
+        if (!$this->section->contains($section)) {
+            $this->section[] = $section;
+            $section->setCourse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSection(Lesson $section): self
+    {
+        if ($this->section->removeElement($section)) {
+            // set the owning side to null (unless already changed)
+            if ($section->getCourse() === $this) {
+                $section->setCourse(null);
+            }
+        }
+
+        return $this;
+    }
+
 
 }

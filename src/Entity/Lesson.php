@@ -15,24 +15,27 @@ class Lesson
     #[ORM\Column(type: 'integer')]
     private $id;
 
-
     #[ORM\Column(type: 'text')]
     private $description;
 
     #[ORM\OneToOne(mappedBy: 'lesson', targetEntity: Video::class, cascade: ['persist', 'remove'])]
     private $video;
 
-    #[ORM\OneToOne(mappedBy: 'lesson', targetEntity: Category::class, cascade: ['persist', 'remove'])]
-    private $category;
-
     #[ORM\ManyToOne(targetEntity: Course::class, inversedBy: 'section')]
+    #[ORM\JoinColumn(nullable: true)]
     private $course;
 
+    #[ORM\OneToMany(mappedBy: 'lesson', targetEntity: File::class)]
+    private $files;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $title;
 
     public function __construct()
     {
-        $this->sections = new ArrayCollection();
+        $this->files = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -74,28 +77,6 @@ class Lesson
         return $this;
     }
 
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?Category $category): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($category === null && $this->category !== null) {
-            $this->category->setLesson(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($category !== null && $category->getLesson() !== $this) {
-            $category->setLesson($this);
-        }
-
-        $this->category = $category;
-
-        return $this;
-    }
-
     public function getCourse(): ?Course
     {
         return $this->course;
@@ -108,6 +89,46 @@ class Lesson
         return $this;
     }
 
+    /**
+     * @return Collection<int, File>
+     */
+    public function getFiles(): Collection
+    {
+        return $this->files;
+    }
 
+    public function addFile(File $file): self
+    {
+        if (!$this->files->contains($file)) {
+            $this->files[] = $file;
+            $file->setLesson($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFile(File $file): self
+    {
+        if ($this->files->removeElement($file)) {
+            // set the owning side to null (unless already changed)
+            if ($file->getLesson() === $this) {
+                $file->setLesson(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
 
 }

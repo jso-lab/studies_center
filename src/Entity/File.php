@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoryRepository;
+use App\Repository\FileRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CategoryRepository::class)]
-class Category
+#[ORM\Entity(repositoryClass: FileRepository::class)]
+class File
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -16,7 +16,7 @@ class Category
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $name;
 
-    #[ORM\OneToOne(inversedBy: 'category', targetEntity: Lesson::class, cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(targetEntity: Lesson::class, inversedBy: 'files')]
     private $lesson;
 
     public function getId(): ?int
@@ -47,6 +47,4 @@ class Category
 
         return $this;
     }
-
-  
 }

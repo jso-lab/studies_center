@@ -19,12 +19,11 @@
                 <td>
                     {% for video in lesson.video %}
                         <div>
-                            <video controls fullscreen width="500">
-
-                                <source src="{{ asset('/videos/' ~ video.name) }}" type="video/mp4">
-
-                                Un problème est survenu...
-                            </video>
+                           <video id="video" controls height="300" width="400">
+                            <caption>{{ lesson.title }}</caption>
+                            <source src="{{ asset('/videos/' ~ video.name) }}" type="video/mp4" alt="video"/>
+                            Un problème est survenu...
+                        </video>
                         </div>
                     {% endfor %}
                 </td>
@@ -41,7 +40,7 @@
         </tbody>
     </table>
 
-      <a href="{{ path('app_lesson_index') }}"><button class="btn btn-primary">Retour à l'index</button></a>
+      <a href="{{ path('app_course_index', {'id': lesson.id}) }}"><button class="btn btn-primary">Retour à l'index</button></a>
 
      <a href="{{ path('app_lesson_edit', {'id': lesson.id}) }}"><button class="btn btn-warning">Modifier</button></a>
 

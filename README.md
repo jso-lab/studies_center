@@ -4,8 +4,8 @@
 
 A web site using:
 
-- [Symfony](https://symfony.com/) v12
-- [Bootstrap](https://getbootstrap.com/) v3.0
+- [Symfony](https://symfony.com/) v6
+- [Bootstrap](https://getbootstrap.com/) v5.0
 
 ## Application content
 
@@ -22,7 +22,11 @@ This website is an certification appliance. It'a made in order to improve all th
 
 To start installing the project's dependencies by running:
 
-1. Donwload the repository code throw the green button on top
+1. Donwload the repository code throw the green button on top and run the command below to setup the developpement dependencies
+
+```shell
+composer install
+```
 
 2. Install the dependencies of the project.
 
@@ -30,7 +34,7 @@ To start installing the project's dependencies by running:
 npm install
 ```
 
-3. You should have [Apache] and [MySQL] installed on your machine.
+3. You should have [Apache](https://httpd.apache.org/) and [MySQL](https://www.mysql.com/fr/downloads/) or some database maanager installed on your machine. The easiest way is the install et run [PhpMyAdmin](https://www.phpmyadmin.net/). Download [Xampp](https://www.apachefriends.org/fr/index.html)
 
 4. Access the .env file to update the database informations.
 

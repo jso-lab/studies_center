@@ -42,8 +42,8 @@ class CourseType extends AbstractType
             ->add('section', ChoiceType::class ,[
                 'choices' => [
                     'Développement durable' => true,
-                'Ecologie domestique' => true,
-                'Nature technique' => true
+                    'Ecologie domestique' => true,
+                    'Nature technique' => true
                 ],
                 'mapped' => false
             ])
