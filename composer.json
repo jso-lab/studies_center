@@ -110,6 +110,7 @@
         "symfony/maker-bundle": "^1.38",
         "symfony/stopwatch": "6.0.*",
         "symfony/web-profiler-bundle": "6.0.*",
+        "symfony/webpack-encore-pack": "^1.0",
         "zenstruck/foundry": "^1.17"
     }
 }
