@@ -14,7 +14,7 @@ class HomeController extends AbstractController
 
     public function index(CoursesRepository $coursesRepository, $limit = 3): Response
     {
-        return $this->render('home/home.html.twig', [
+        return $this->render('Home/home.html.twig', [
            
             //On affiche que les trois dernères formation
             'courses' => $coursesRepository->findBy([], ['id' => 'DESC'], $limit),
