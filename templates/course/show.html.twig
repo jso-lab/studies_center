@@ -7,17 +7,21 @@
 {% include 'navigation.html.twig'%}
 
 <main class=" container py-5">
+<div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
     <h1>{{ course.title }}</h1>
     <div class="card mb-3">
        {% for illustration in course.illustrations %}
-                            <div>
-                                <img class="card-img-top" src="{{ asset('/images/courses/' ~ illustration.name) }}" alt="images"/>
-                            </div>
-                        {% endfor %}
+            <div>
+                <img class="card-img-top" src="{{ asset('/images/courses/' ~ illustration.name) }}" alt="images"/>
+            </div>
+        {% endfor %}
             <div class="card-body">
                 <h5 class="card-title">{{ course.title }}</h5>
                     <p class="card-text">{{ course.description }}</p>
                     <p class="card-text"><small class="text-muted">Formation N° {{ course.id }}</small></p>
+                        <a href="#"><button class="btn btn-secondary">Marquer comme termninée</button></a>
             </div>
     </div>
 
@@ -28,34 +32,44 @@
 {{ include('course/_delete_form.html.twig') }}
 {% endif %}
 
-<table class="table table-hover">
-        <caption>Contenu de la formation</caption>
-      
-        <tbody>
-        {% for lesson in lessons %}
-            <tr>
-               
-                <td>{{ lesson.title }}</td>
-                <td>
-                   {% for video in lesson.video %}
-                        <div>
-                            <video class="m-3"><source src="{{ asset('/videos/' ~ video.name) }}" alt="images" width="200"/></video>
-                        </div>
+
+<div class="accordion accordion-flush mb-4" id="accordionFlushExample">
+            <div class="accordion-item">
+
+            {% for lesson in lessons %}
+
+            <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    {{ lesson.id }} - {{ lesson.title }}
+                </button>
+            </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                    {% for video in lesson.video %}
+                       
+                        <video id="video" controls preload="metadata">
+                            <caption>{{ lesson.title }}</caption>
+                            <source src="{{ asset('/videos/' ~ video.name) }}" type="video/mp4" alt="video"/>
+                            Un problème est survenu...
+                        </video>
+                       
                     {% endfor %}
-                </td>
-                <td>{{ lesson.description }}</td>
-                <td>
-                    <a href="{{ path('app_lesson_show', {'id': lesson.id}) }}"><button class="btn btn-info mb-1">Afficher</button></a>
-                {% if is_granted('ROLE_TEACHER')%}    
-                    <a href="{{ path('app_lesson_edit', {'id': lesson.id}) }}"><button class="btn btn-warning">Modifier</button></a>
-                </td>
-                {% endif %}
-                
-            </tr>
-        {% else %}
-           
-        {% endfor %}
-        </tbody>
-    </table>
+                    <div class="accordion-body">
+                        {{ lesson.description }}
+                     
+                    </div>
+                    <div>
+        <a href="{{ path('app_lesson_show', {'id': lesson.id}) }}"><button class="btn btn-info mb-1">Afficher</button></a>
+            {% if is_granted('ROLE_TEACHER')%}    
+                <a href="{{ path('app_lesson_edit', {'id': lesson.id}) }}"><button class="btn btn-warning">Modifier</button></a>
+    </div>
+            {% endif %}
+                </div>
+        </div>
+   
+
+
+     {% endfor %}
 </main>
 {% endblock %}
+
+

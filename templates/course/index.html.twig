@@ -9,37 +9,40 @@
 <main class=" container py-5">
     <h1>Catalogue des formations</h1>
 
-    <table class="table table-hover">
-        <caption>Liste des formations</caption>
-      
-        <tbody>
         {% for course in courses %}
-            <tr>
-               
-                <td>{{ course.title }}</td>
-                <td>
-                   {% for illustration in course.illustrations %}
-                        <div>
-                            <img class="m-3" src="{{ asset('/images/courses/' ~ illustration.name) }}" alt="images" width="200"/>
-                        </div>
-                    {% endfor %}
-                </td>
-                <td>{{ course.description }}</td>
-                
-                <td>
+          
+             <div class="card mb-3">
+       {% for illustration in course.illustrations %}
+            <div>
+                <img class="card-img-top" src="{{ asset('/images/courses/' ~ illustration.name) }}" alt="images"/>
+            </div>
+        {% endfor %}
+            <div class="card-body">
+                <h5 class="card-title">{{ course.title }}</h5>
+                    <p class="card-text">{{ course.description }}</p>
+                    <p class="card-text"><small class="text-muted">Formation N° {{ course.id }}</small></p>
+                        
+                <div>
+                    <a href="#"><button class="btn btn-secondary">Marquer comme termninée</button></a>
+                </div>
+                <div class="pt-2">
                     <a href="{{ path('app_course_show', {'id': course.id}) }}"><button class="btn btn-info mb-1">Afficher</button></a>
                 {% if is_granted('ROLE_TEACHER')%}    
                     <a href="{{ path('app_course_edit', {'id': course.id}) }}"><button class="btn btn-warning">Modifier</button></a>
-                </td>
+                </div>
                 {% endif %}
-            </tr>
+            </div>
+            </div>
+               
+                
+                
+           
         {% else %}
-            <tr>
-                <td colspan="6">Aucun résultat</td>
-            </tr>
+            <div>
+                <p colspan="6">Aucun résultat</p>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
+       
 {% if is_granted('ROLE_TEACHER') %}
     <a href="{{ path('app_course_new') }}"><button class="btn btn-primary">Ajouter une nouvelle formation</button></a>
 {% endif %}
